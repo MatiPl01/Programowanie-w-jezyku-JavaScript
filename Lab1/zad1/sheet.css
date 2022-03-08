@@ -1,0 +1,87 @@
+/* Variables */
+:root {
+  --text-fade-duration: 2s;
+  --text-fade-color-1: red;
+  --text-fade-color-2: blue;
+}
+
+h1,
+h2 {
+  margin: 0;
+}
+
+/* Body */
+body {
+  padding: 10px;
+}
+
+body > * {
+  margin-bottom: 10px;
+}
+
+/* Header */
+header {
+  padding: 5px;
+}
+
+/* Nav */
+nav {
+  width: max-content;
+  float: left;
+  padding-right: 7.5px;
+}
+
+/* Aside */
+aside {
+  float: right;
+  width: 50%;
+  padding: 7.5px;
+}
+
+aside h1 {
+  animation: fade-text-red-blue var(--text-fade-duration) linear infinite alternate;
+}
+
+/* Main */
+main { 
+  clear: left;
+  padding: 7.5px 7.5px 35px 7.5px;
+  width: max-content;
+}
+
+main blockquote {
+  margin: 0;
+}
+
+main h1 {
+  margin-bottom: 10px;
+}
+
+main blockquote p {
+  font-family: monospace;
+  margin: 0;
+}
+
+/* Footer */
+footer {
+  padding: 7.5px;
+}  
+
+/* Classes */
+.azure {
+  background-color: #f0ffff;
+}
+
+.border {
+  border: 1px solid black;
+}
+
+.shadow {
+  box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+}
+
+/* Animations */
+@keyframes fade-text-red-blue {
+  from { color: var(--text-fade-color-1); }
+  to   { color: var(--text-fade-color-2); }
+}
