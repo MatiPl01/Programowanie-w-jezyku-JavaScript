@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="css/styles.css">
+  <title>
+    Tytuł strony / Page Title
+  </title>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <!-- TODO - add mobile nav -->
+  <nav class="nav w3-bar w3-amber w3-padding">
+    <input class="nav-checkbox" type="checkbox" name="toggle" id="toggle">
+    <button class="nav-toggle w3-button">
+      <label for="toggle"></label>
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <div class="nav-content">
+      <div class="w3-container w3-left w3-mobile">
+        <a href="#" class="w3-bar-item w3-button">
+          <i class="fa-solid fa-cart-shopping"></i>
+        </a>
+        <div class="w3-dropdown-hover">
+          <button class="w3-button">
+            Produkty
+            <i class="fa-solid fa-caret-down"></i>
+          </button>
+          <div class="w3-dropdown-content w3-bar-block w3-card-4">
+            <a href="#" class="w3-bar-item w3-button">Link 1</a>
+            <a href="#" class="w3-bar-item w3-button">Link 2</a>
+            <a href="#" class="w3-bar-item w3-button">Link 3</a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="w3-container w3-right w3-mobile">
+        <input type="text" class="w3-bar-item w3-input w3-green w3-text-black" placeholder="Search..">
+        <a href="#" class="w3-bar-item w3-button w3-dark-gray w3-text-white">Szukaj</a>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Content -->
+  <main>
+    <div class="w3-row">
+      <div class="cell w3-col w3-container m8">
+        <div class="w3-border w3-round">
+          <img class="img-contain" src="img/desktop.jpg" alt="Desktop">
+          <h3 class="heading">Zestaw komputerowy 1</h3>
+          <ul>
+            <li>Lorem ipsum dolor sit amet.</li>
+            <li>Lorem ipsum dolor sit amet.</li>
+            <li>Lorem ipsum dolor sit amet.</li>
+            <li>Lorem ipsum dolor sit amet.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="cell w3-col w3-container m4">
+        <div class="w3-border w3-round">
+          <img class="img-contain" src="img/desktop.jpg" alt="Desktop">
+          <h3 class="heading">Zestaw komputerowy 2</h3>
+          <ul>
+            <li>Lorem ipsum dolor sit amet.</li>
+            <li>Lorem ipsum dolor sit amet.</li>
+            <li>Lorem ipsum dolor sit amet.</li>
+            <li>Lorem ipsum dolor sit amet.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="w3-row mouses">
+      <div class="w3-col w3-container m4">
+      </div>
+      <div class="cell mouse-1 w3-col w3-container m4">
+        <div class="w3-border w3-round">
+          <img class="img-contain" src="img/mouse.png" alt="Mouse">
+        </div>
+      </div>
+      <div class="cell mouse-2 w3-col w3-container m4">
+        <div class="w3-border w3-round">
+          <img class="img-contain" src="img/mouse.png" alt="Mouse">
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer w3-panel w3-green">
+    <p>This is a footer</p>
+  </footer>
+</body>
+
+</html>
