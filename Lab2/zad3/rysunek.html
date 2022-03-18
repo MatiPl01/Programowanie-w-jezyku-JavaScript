@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+  <meta charset="UTF-8">
+  <title>
+    Page title
+  </title>
+  <!-- 
+    Napis nie pojawił się dlatego, że w momencie wykonywania skryptu,
+    znacznik 'canvas' jeszcze nie istnieje (nie został jeszcze załadowany),
+    więc document.getElementById('canvas') zwraca wartość null.
+    W konsoli pojawia się błąd, wskazujący na próbę wykonania metody 
+    getContext na wartości null, ponieważ zmienna canvas ma wartość null,
+    a null nie posiada metody getContext
+
+    Zmiana: 'opakowanie' kodu w event listenera 'load', dzięki czemu
+    kod jest uruchamiany po załadowaniu HTML
+   -->
+  <script>
+    window.addEventListener('load', () => {
+      var canvas = document.getElementById('canvas');
+      var ctx = canvas.getContext('2d');
+      ctx.fillText("Hello World", 10, 50); //Wykreślenie podanego tekstu na płótnie / Drawing given text on canvas
+      
+      // Circle
+      ctx.beginPath()
+      ctx.lineWidth = 4
+      ctx.strokeStyle = 'royalblue'
+      ctx.arc(75, 135, 35, 0, 2 * Math.PI)
+      ctx.fillStyle = 'wheat'
+      ctx.fill()
+      ctx.stroke()
+
+      // Triangle
+      ctx.beginPath()
+      ctx.lineWidth = 5
+      ctx.strokeStyle = 'indigo'
+      ctx.moveTo(150, 150)
+      ctx.lineTo(180, 200)
+      ctx.lineTo(120, 200)
+      ctx.closePath()
+      ctx.fillStyle = 'wheat'
+      ctx.fill()
+      ctx.stroke()
+      
+
+      // Rectangle
+      ctx.beginPath()
+      ctx.lineWidth = 4
+      ctx.strokeStyle = 'orangered'
+      ctx.rect(20, 200, 80, 80)
+      ctx.fillStyle = 'wheat'
+      ctx.fill()
+      ctx.stroke()
+    })
+  </script>
+</head>
+
+<body>
+  <main>
+    <h1>
+      Płótno
+    </h1>
+
+    <h1>
+      Canvas
+    </h1>
+
+    <canvas id="canvas" width="200" height="300" style="border:1px solid #000000;">
+      Wygląda na to, że twoja przeglądarka nie obsługuje elementu "canvas" / It looks like your browser does not support
+      the "canvas" element
+    </canvas>
+  </main>
+</body>
+
+</html>
