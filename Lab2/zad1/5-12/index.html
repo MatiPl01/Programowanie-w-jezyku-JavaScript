@@ -1,0 +1,70 @@
+<html>
+  <!-- 
+    Treść nie jest widoczna, bo wykonujemy document.write po zakończeniu
+    renderowania strony, więc cała zawartość w znaczniku body zostaje 
+    zastąpiona kodem HTML, przekazanym w argumencie funkcji document.write
+    (jako tekst)
+  -->
+  <body onLoad="
+            console.log('Tekst 1');
+            window.alert('Tekst 2');
+          ">
+    <div>Treść dokumentu HTML</div>
+    <div>Treść dokumentu HTML</div>
+    <div>Treść dokumentu HTML</div>
+
+    <script>
+      /* - Żaden z obu argumentów nie jest obowiązkowy,
+         - Pierwszy argument stanowi teść wyświetlaną nad polem, służącym,
+           do wprowadzenia odpowiedzi przez użytkownika,
+         - Drugi argument stanowi wartość domyślną, która jest wpisana
+           w polu, służącym do wprowadzenia odpowiedzi przez użytkownika
+       */
+      // window.prompt("Tekst1", "Tekst2");
+
+      /* - Wprowadzeniu wartości będącej liczbą i naciśnięciu klawisza 'Enter' lub przycisku 'OK',
+           REZULTAT: string, składający się z wprowadzonych znaków
+
+         - Wprowadzeniu wartości będącej napisem i naciśnięciu klawisza 'Enter' lub przycisku 'OK',
+           REZULTAT: string, składający się z wprowadzonych znaków
+
+         - Niewprowadzeniu wartości i naciśnięciu powyższego klawisza / przycisku,
+           REZULTAT: pusty string
+
+         - Wprowadzeniu wartości i naciśnięciu przycisku 'Anuluj',
+           REZULTAT: null (typ: Object)
+       */
+      const response = window.prompt("Wpisz coś:")
+      console.log(`Wpisana wartość: ${response}\nTyp wartości: ${typeof response}`)
+
+      /*
+        - Wprowadzeniu wartości będącej liczbą i naciśnięciu powyższego przycisku,
+          REZULTAT: 
+            Pole input typu text:   string, którego znaki są takie jak kolejne cyfry wprowadzonej liczby
+            Pole input typu number: number, liczba taka jak wprowadzona
+
+        - Wprowadzeniu wartości będącej napisem i naciśnięciu w/w przycisku,
+          REZULTAT: 
+            Pole input typu text:   string, składający się z wprowadzonych znaków
+            Pole input typu number: nie da się wpisać nic innego niż liczba (oraz znaki +/-)
+
+        - Niewprowadzeniu wartości i naciśnięciu przycisku "Wypisz",
+            Pole input typu text:   pusty string
+            Pole input typu number: number, liczba 0
+      */
+      const logInput = () => {
+        const elements = document.forms[0].elements
+        const text = elements[0].value
+        const number = +elements[1].value
+        console.log(`Wartość pola tekstowego: ${text} (typ: ${typeof text})
+Wartość pola liczbowego: ${number} (typ: ${typeof number})`)
+      };
+    </script>
+
+    <form>
+      <input name="pole_tekstowe" type="text">
+      <input name="pole_liczbowe" type="number">
+      <input type="button" value="Wypisz" onClick="logInput()">
+    </form>
+  </body>
+</html>
