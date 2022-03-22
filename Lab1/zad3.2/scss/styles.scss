@@ -1,0 +1,38 @@
+ol {
+  list-style-type: none;
+  counter-reset: item;
+
+  & > li {
+    counter-increment: item;
+
+    a::before {
+      content: counters(item, ".")" ";
+    }
+  }
+}
+
+.toc {
+  &__nav {
+    // height: 100vh;
+    padding: 0 !important;
+  }
+
+  &__list {
+    height: calc(100vh - 80px);
+
+    &,
+    & > li > ol {
+      padding: 0;
+    }
+
+    & > li::before {
+      display: none;
+    }
+  }
+
+  &__content {
+    height: 100vh;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+  }
+}

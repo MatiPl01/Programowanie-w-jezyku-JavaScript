@@ -1,0 +1,30 @@
+ol {
+  list-style-type: none;
+  counter-reset: item;
+}
+ol > li {
+  counter-increment: item;
+}
+ol > li a::before {
+  content: counters(item, ".") " ";
+}
+
+.toc__nav {
+  padding: 0 !important;
+}
+.toc__list {
+  height: calc(100vh - 80px);
+}
+.toc__list, .toc__list > li > ol {
+  padding: 0;
+}
+.toc__list > li::before {
+  display: none;
+}
+.toc__content {
+  height: 100vh;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+/*# sourceMappingURL=styles.css.map */
