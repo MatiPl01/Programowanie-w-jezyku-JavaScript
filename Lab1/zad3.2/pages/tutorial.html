@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" 
+        rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
+        crossorigin="anonymous">
+  <link rel="stylesheet" 
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
+        integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="
+        crossorigin="anonymous" 
+        referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="../css/styles.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" 
+          crossorigin="anonymous" 
+          defer>
+  </script>
+  
+  <title>MyJsTutorial | Tutorial</title>
+</head>
+<body class="tutorial-page">
+  <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="../index.html">MyJsTutorial</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav-toggle"
+        aria-controls="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nav-toggle">
+        <ul class="navbar-nav me-auto mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="../index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active disabled" aria-current="page" href="#">Tutorial</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./about.html" tabindex="-1" aria-disabled="true">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="./contact.html" tabindex="-1" aria-disabled="true">Contact</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+<main class="coursebook">
+  <div class="container-fluid">
+    <div class="row">
+      <nav id="toc-navbar" class="toc navbar navbar-light bg-light col-lg-3 col-md-4 p-0 shadow flex-column flex-nowrap" data-bs-scroll="true">
+        <div class="p-3">
+          <h4>Chapter 11</h4>
+          <h5>Variables and assignment</h5>
+        </div>
+        <ol class="toc__list nav nav-pills flex-column flex-nowrap overflow-auto">
+          <li>
+            <a class="nav-link" href="#item-11-1">let</a>
+          </li>
+          <li>
+            <a class="nav-link" href="#item-11-2">const</a>
+            <ol class="nav nav-pills flex-column">
+              <li class="ms-3 my-1">
+                <a class="nav-link" href="#item-11-2-1">const and immutability</a>
+              </li>
+              <li class="ms-3 my-1">
+                <a class="nav-link" href="#item-11-2-2">const and loops</a>
+              </li>
+            </ol>
+          </li>
+          <li>
+            <a class="nav-link" href="#item-11-3">Deciding between const and let</a>
+          </li>
+          <li>
+            <a class="nav-link" href="#item-11-4">The scope of a variable</a>
+            <ol class="nav nav-pills flex-column">
+              <li class="ms-3 my-1">
+                <a class="nav-link" href="#item-11-4-1">Shadowing variables</a>
+              </li>
+            </ol>
+          </li>
+          <li>
+            <a class="nav-link" href="#item-11-5">(Advanced)</a>
+          </li>
+          <li>
+            <a class="nav-link" href="#item-11-6">Terminology: static vs dynamic</a>
+            <ol class="nav nav-pills flex-column">
+              <li class="ms-3 my-1">
+                <a class="nav-link" href="#item-11-6-1">Static phenomenon: scopes of variables</a>
+              </li>
+              <li class="ms-3 my-1">
+                <a class="nav-link" href="#item-11-6-2">Dynamic phenomenon: function calls</a>
+              </li>
+            </ol>
+          </li>
+          <li>
+            <a class="nav-link" href="#item-11-7">Global variables and the global object</a>
+            <ol class="nav nav-pills flex-column">
+              <li class="ms-3 my-1">
+                <a class="nav-link" href="#item-11-7-1">globalThis [ES2020]</a>
+              </li>
+            </ol>
+          </li>
+          <li>
+            <a class="nav-link" href="#item-11-8">Declarations: scope and activation</a>
+            <ol class="nav nav-pills flex-column">
+              <li class="ms-3 my-1">
+                <a class="nav-link" href="#item-11-8-1">const and let: temporal dead zone</a>
+              </li>
+              <li class="ms-3 my-1">
+                <a class="nav-link" href="#item-11-8-2">Function declarations and early activation</a>
+              </li>
+              <li class="ms-3 my-1">
+                <a class="nav-link" href="#item-11-8-3">Class declarations are not activated early</a>
+              </li>
+              <li class="ms-3 my-1">
+                <a class="nav-link" href="#item-11-8-4">var: hoisting (partial early activation)</a>
+              </li>
+            </ol>
+          </li>
+          <li>
+            <a class="nav-link" href="#item-11-9">Closures</a>
+            <ol class="nav nav-pills flex-column">
+              <li class="ms-3 my-1">
+                <a class="nav-link" href="#item-11-9-1">Bound variables vs free variables</a>
+              </li>
+              <li class="ms-3 my-1">
+                <a class="nav-link" href="#item-11-9-2">What is a closure?</a>
+              </li>
+              <li class="ms-3 my-1">
+                <a class="nav-link" href="#item-11-9-3">Example: A factory for incrementors</a>
+              </li>
+              <li class="ms-3 my-1">
+                <a class="nav-link" href="#item-11-9-4">Use cases for closures</a>
+              </li>
+            </ol>
+          </li>
+        </ol>
+      </nav>
+
+      <article class="content col-lg-9 col-md-8 p-0" data-bs-spy="scroll" data-bs-target="#toc-navbar" data-bs-offset="0" tabindex="0">
+        <div class="py-4 px-5">
+          <section>
+          <p>These are JavaScript's main ways of declaring variables:</p>
+          <ul>
+            <li>let declares mutable variables.</li>
+            <li>const declares constants (immutable variables).</li>
+          </ul>
+          <p>Before ES6, there was also var. But it has several quirks, so it's best to avoid it in modern
+            JavaScript. You can read more about it in Speaking JavaScript.</p>
+        </section>
+
+        <section class="content__section content__section--primary" id="item-11-1">
+          <h4>let</h4>
+          <p>Variables declared via let are mutable:</p>
+          
+<pre><code>  let i;
+  i = 0;
+  i = i + 1;
+  assert.equal(i, 1);
+</code></pre>
+
+          <p>You can also declare and assign at the same time:</p>
+
+<pre><code>  let i = 0;
+</code></pre>
+        </section>
+      
+        <section class="content__section content__section--primary" id="item-11-2">
+          <h4>const</h4>
+          <p>Variables declared via const are immutable. You must always initialize immediately:</p>
+
+<pre><code>  const i = 0; // must initialize
+  assert.throws(
+    () => { i = i + 1 },
+    {
+      name: 'TypeError',
+      message: 'Assignment to constant variable.',
+    }
+  );
+</code></pre>
+
+          <section class="content__section content__section--secondary" id="item-11-2-1">
+            <h5>const and immutability</h5>
+            <p>In JavaScript, const only means that the binding (the association between variable name
+            and variable value) is immutable. The value itself may be mutable, like obj in the following example.</p>
+
+<pre><code>  const obj = { prop: 0 };
+
+  // Allowed: changing properties of `obj`
+  obj.prop = obj.prop + 1;
+  assert.equal(obj.prop, 1);
+
+  // Not allowed: assigning to `obj`
+  assert.throws(
+    () => { obj = {} },
+    {
+      name: 'TypeError',
+      message: 'Assignment to constant variable.',
+    }
+  );
+</code></pre>
+          </section>
+          
+          <section class="content__section content__section--secondary" id="item-11-2-2">
+            <h5>const and loops</h5>
+            <p>You can use const with for-of loops, where a fresh binding is created for each iteration:</p>
+
+<pre><code>  const arr = ['hello', 'world'];
+  for (const elem of arr) {
+    console.log(elem);
+  }
+  // Output:
+  // 'hello'
+  // 'world'
+</code></pre>
+          </section>
+
+          <p>In plain for loops, you must use let, however:</p>
+          
+<pre><code>  const arr = ['hello', 'world'];
+  for (let i=0; i&lt;arr.length; i++) { 
+    const elem=arr[i]; 
+    console.log(elem); 
+  }
+</code></pre>
+        </section>
+
+        <section class="content__section content__section--primary" id="item-11-3">
+          <h4>Deciding between const and let</h4>
+
+          <p>I recommend the following rules to decide between const and let:</p>
+          <ul>
+            <li>const indicates an immutable binding and that a variable never changes its value. Prefer it.</li>
+            <li>let indicates that the value of a variable changes. Use it only when you can't use const.</li>
+          </ul>
+
+          <figure class="border-start border-3 border-dark ps-3 pt-2">
+            <blockquote class="blockquote">
+              <h6><i class="fa-solid fa-puzzle-piece"></i>&nbsp;Exercise: const</h6>
+            </blockquote>
+            <figcaption class="blockquote-footer py-2">
+              exercises/variables-assignment/const_exrc.mjs
+            </figcaption>
+          </figure>
+        </section>
+
+        <section class="content__section content__section--primary" id="item-11-4">
+          <h4>The scope of a variable</h4>
+
+          <p>The scope of a variable is the region of a program where it can be accessed. Consider the
+          following code</p>
+
+<pre><code>  { // // Scope A. Accessible: x
+    const x = 0;
+    assert.equal(x, 0);
+    { // Scope B. Accessible: x, y
+      const y = 1;
+      assert.equal(x, 0);
+      assert.equal(y, 1);
+      { // Scope C. Accessible: x, y, z
+        const z = 2;
+        assert.equal(x, 0);
+        assert.equal(y, 1);
+        assert.equal(z, 2);
+      }
+    }
+  }
+  // Outside. Not accessible: x, y, z
+  assert.throws(
+    () => console.log(x),
+    {
+      name: 'ReferenceError',
+      message: 'x is not defined',
+    }
+  );
+</code></pre>
+
+            <ul>
+              <li>Scope A is the (direct) scope of x.</li>
+              <li>Scopes B and C are inner scopes of scope A.</li>
+              <li>Scope A is an outer scope of scope B and scope C.</li>
+            </ul>
+            <p>Each variable is accessible in its direct scope and all scopes nested within that scope.</p>
+            <p>The variables declared via const and let are called block-scoped because their scopes are always the innermost
+            surrounding blocks.</p>
+
+          <section class="content__section content__section--secondary" id="item-11-4-1">
+            <h5>Shadowing variables</h5>
+
+            <p>You can't declare the same variable twice at the same level:</p>
+
+<pre><code>  assert.throws(
+  () => {
+    eval('let x = 1; let x = 2;');
+  },
+  {
+    name: 'SyntaxError',
+    message: "Identifier 'x' has already been declared",
+  });
+</code></pre>
+
+            <figure class="border-start border-3 border-dark ps-3 pt-2">
+              <blockquote class="blockquote">
+                <h6><i class="fa-solid fa-gears"></i>&nbsp;Why eval()?</h6>
+              </blockquote>
+              <figcaption class="blockquote-footer py-2">
+                eval() delays parsing (and therefore the SyntaxError), until the callback of assert.throws() is executed. If we didn't
+                use it, we'd already get an error when this code is parsed and assert.throws() wouldn't even be executed.
+              </figcaption>
+            </figure>
+
+            <p>You can, however, nest a block and use the same variable name x that you used outside the block:</p>
+
+<pre><code>  const x = 1;
+  assert.equal(x, 1);
+  {
+    const x = 2;
+    assert.equal(x, 2);
+  }
+  assert.equal(x, 1);
+</code></pre>
+
+            <p>Inside the block, the inner x is the only accessible variable with that name. The inner x is said to shadow the outer x.
+          Once you leave the block, you can access the old value again.</p>
+
+            <figure class="border-start border-3 border-dark ps-3 pt-2">
+              <blockquote class="blockquote">
+                <h6><i class="fa-solid fa-list"></i>&nbsp;Quiz: basic</h6>
+              </blockquote>
+              <figcaption class="blockquote-footer py-2">
+                See quiz app.
+              </figcaption>
+            </figure>
+          </section>
+        </section>
+
+        <section class="content__section content__section--primary" id="item-11-5">
+          <h4>(Advanced)</h4>
+
+          <p>All remaining sections are advanced.</p>
+        </section>
+        
+
+        <section class="content__section content__section--primary" id="item-11-6">
+          <h4>Terminology: static vs. dynamic</h4>
+
+          <p>These two adjectives describe phenomena in programming languages:</p>
+          <ul>
+            <li>Static means that something is related to source code and can be determined without executing code.</li>
+            <li>Dynamic means at runtime.</li>
+          </ul>
+          <p>Let’s look at examples for these two terms.</p>
+
+          <section class="content__section content__section--secondary" id="item-11-6-1">
+            <h5>Static phenomenon: scopes of variables</h5>
+
+            <p>Variable scopes are a static phenomenon. Consider the following code:</p>
+
+<pre><code> function f() {
+    const x = 3;
+    // ···
+  }
+</code></pre>
+
+            <p>x is statically (or lexically) scoped. That is, its scope is fixed and doesn't change at runtime.</p>
+            <p>Variable scopes form a static tree (via static nesting).</p>
+          </section>
+          
+          <section class="content__section content__section--secondary" id="item-11-6-2">
+            <h5>Dynamic phenomenon: function calls</h5>
+
+            <p>Function calls are a dynamic phenomenon. Consider the following code:</p>
+
+<pre><code>  function g(x) {}
+  function h(y) {
+    if (Math.random()) g(y); // (A)
+  }
+</code></pre>
+
+            <p>Whether or not the function call in line A happens, can only be decided at runtime.</p>
+            <p>Function calls form a dynamic tree (via dynamic calls).</p>
+          </section>
+        </section>
+        
+        <section class="content__section content__section--primary" id="item-11-7">
+          <h4>Global variables and the global object</h4>
+
+          <p>JavaScript’s variable scopes are nested. They form a tree:</p>
+          <ul>
+            <li>The outermost scope is the root of the tree.</li>
+            <li>The scopes directly contained in that scope are the children of the root.</li>
+            <li>And so on.</li>
+          </ul>
+          <p>The root is also called the global scope. In web browsers, the only location where one is directly in that scope is at
+          the top level of a script. The variables of the global scope are called global variables and accessible everywhere.
+          There are two kinds of global variables:</p>
+          <ul>
+            <li>
+              Global declarative variables are normal variables.
+              <ul>
+                <li>They can only be created while at the top level of a script, via const, let, and class declarations.</li>
+              </ul>
+            </li>
+            <li>
+              Global object variables are stored in properties of the so-called global object.
+              <ul>
+                <li>They are created in the top level of a script, via var and function declarations.</li>
+                <li>The global object can be accessed via the global variable globalThis. It can be used to create, read, and delete global
+                object variables.</li>
+                <li>Other than that, global object variables work like normal variables.</li>
+              </ul>
+            </li>
+          </ul>
+          <p>The following HTML fragment demonstrates globalThis and the two kinds of global variables.</p>
+
+<pre><code>  &lt;script&gt;
+    const declarativeVariable = 'd';
+    var objectVariable = 'o';
+  &lt;/script&gt;
+  &lt;script&gt;
+    // All scripts share the same top-level scope:
+    console.log(declarativeVariable); // 'd'
+    console.log(objectVariable); // 'o'
+
+    // Not all declarations create properties of the global object:
+    console.log(globalThis.declarativeVariable); // undefined
+    console.log(globalThis.objectVariable); // 'o'
+  &lt;/script&gt;
+</code></pre>
+
+          <p>Each ECMAScript module has its own scope. Therefore, variables that exist at the top level of a module are not global.
+          Fig. 11.1 illustrates how the various scopes are related.</p>
+
+          <section class="content__section content__section--secondary" id="item-11-7-1">
+            <h5>globalThis [ES2020]</h5>
+
+            <p>The global variable globalThis is the new standard way of accessing the global object. It got its name from the fact
+            that it has the same value as this in global scope.</p>
+
+            <figure class="border-start border-3 border-dark ps-3 pt-2">
+              <blockquote class="blockquote">
+                <h6><i class="fa-solid fa-gears"></i>&nbsp;globalThis does not always directly point to the global object</h6>
+              </blockquote>
+              <figcaption class="blockquote-footer py-2">
+                For example, in browsers, there is an indirection. That indirection is normally not noticable, but it is there and can
+                be observed.
+              </figcaption>
+            </figure>
+
+            <figure class="figure">
+              <img src="../images/variables-assignment/global-scope.svg" class="figure-img img-fluid rounded"
+                alt="JavaScript global scope image">
+              <figcaption class="figure-caption">Figure 11.1: The global scope is JavaScript's outermost scope. It has two kinds of variables: object variables (managed
+                via the global object) and normal declarative variables. Each
+                ECMAScript module has its own scope which is contained in the global scope.
+              </figcaption>
+            </figure>
+
+            <section class="content__section content__section--tertiary">
+              <h6>Alternatives to globalThis</h6>
+              
+              <p>Older ways of accessing the global object depend on the platform:</p>
+              <ul>
+                <li>Global variable window: is the classic way of referring to the global object. But it
+                doesn't work in Node.js and in Web Workers.</li>
+                <li>Global variable self: is available in Web Workers and browsers in general. But it
+                isn't supported by Node.js.</li>
+                <li>Global variable global: is only available in Node.js.</li>
+              </ul>
+            </section>
+
+            <section class="content__section content__section--tertiary">
+              <h6>Use cases for globalThis</h6>
+            
+              <p>The global object is now considered a mistake that JavaScript can't get rid of, due to
+              backward compatibility. It affects performance negatively and is generally confusing.</p>
+              <p>ECMAScript 6 introduced several features that make it easier to avoid the global object
+              – for example:</p>
+              <ul>
+                <li>const, let, and class declarations don't create global object properties when used
+                in global scope.</li>
+                <li>Each ECMAScript module has its own local scope.</li>
+              </ul>
+              <p>It is usually better to access global object variables via variables and not via properties
+              of globalThis. The former has always worked the same on all JavaScript platforms.</p>
+              <p>Tutorials on the web occasionally access global variables globVar via window.globVar.
+              But the prefix “window.” is not necessary and I recommend to omit it:</p>
+
+<pre><code>  window.encodeURIComponent(str); // no
+  encodeURIComponent(str); // yes
+</code></pre>
+
+              <p>Therefore, there are relatively few use cases for globalThis – for example:</p>
+              <ul>
+                <li>Polyfills that add new features to old JavaScript engines.</li>
+                <li>Feature detection, to find out what features a JavaScript engine supports.</li>
+              </ul>
+            </section>
+          </section>
+        </section>
+
+        <section class="content__section content__section--primary" id="item-11-8">
+          <h4>Declarations: scope and activation</h4>
+
+          <p>Declarations: scope and activation</p>
+          <ul>
+            <li>Scope: Where can a declared entity be seen? This is a static trait.</li>
+            <li>Activation: When can I access an entity? This is a dynamic trait. Some entities
+            can be accessed as soon as we enter their scopes. For others, we have to wait until
+            execution reaches their declarations.</li>
+          </ul>
+          <p>Tbl. 11.1 summarizes how various declarations handle these aspects.</p>
+
+
+          <table class="table table-striped table-responsive caption-top">
+            <caption>Table 11.1: Aspects of declarations. "Duplicates: describes if a declaration can be used twice with the same name (per
+            scope). "Global prop.:
+            describes if a declaration adds a property to the global object, when it is
+            executed in the global scope of a script. TDZ means temporal dead zone
+            (which is explained later). (*) Function declarations are normally block-scoped, but function-scoped in sloppy mode.</caption>
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Scope</th>
+                <th scope="col">Activation</th>
+                <th scope="col">Duplicates</th>
+                <th scope="col">Global prop.</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>const</th>
+                <td>Block</td>
+                <td>decl. (TDZ)</td>
+                <td><i class="fa-solid fa-xmark"></i></td>
+                <td><i class="fa-solid fa-xmark"></i></td>
+              </tr>
+              <tr>
+                <th>let</th>
+                <td>Block</td>
+                <td>decl. (TDZ)</td>
+                <td><i class="fa-solid fa-xmark"></i></td>
+                <td><i class="fa-solid fa-xmark"></i></td>
+              </tr>
+              <tr>
+                <th>function</th>
+                <td>Block (*)</td>
+                <td>start</td>
+                <td><i class="fa-solid fa-check"></i></td>
+                <td><i class="fa-solid fa-check"></i></td>
+              </tr>
+              <tr>
+                <th>class</th>
+                <td>Block</td>
+                <td>decl. (TDZ)</td>
+                <td><i class="fa-solid fa-xmark"></i></td>
+                <td><i class="fa-solid fa-xmark"></i></td>
+              </tr>
+              <tr>
+                <th>import</th>
+                <td>Module</td>
+                <td>same as export</td>
+                <td><i class="fa-solid fa-xmark"></i></td>
+                <td><i class="fa-solid fa-xmark"></i></td>
+              </tr>
+              <tr>
+                <th>var</th>
+                <td>Function</td>
+                <td>start, partially</td>
+                <td><i class="fa-solid fa-check"></i></td>
+                <td><i class="fa-solid fa-check"></i></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p>import is described in §27.5 “ECMAScript modules”. The following sections describe
+          the other constructs in more detail.</p>
+
+          <section class="content__section content__section--secondary" id="item-11-8-1">
+            <h5>const and let: temporal dead zone</h5>
+
+            <p>For JavaScript, TC39 needed to decide what happens if you access a constant in its direct
+            scope, before its declaration:</p>
+
+<pre><code>  {
+    console.log(x); // What happens here?
+    const x;
+  }
+</code></pre>
+
+            <p>Some possible approaches are:</p>
+            <ol>
+              <li>The name is resolved in the scope surrounding the current scope.</li>
+              <li>You get undefined.</li>
+              <li>There is an error.</li>
+            </ol>
+            <p>Approach 1 was rejected because there is no precedent in the language for this approach.
+            It would therefore not be intuitive to JavaScript programmers.</p>
+            <p>Approach 2 was rejected because then x wouldn't be a constant – it would have different
+            values before and after its declaration.</p>
+            <p>let uses the same approach 3 as const, so that both work similarly and it's easy to switch
+            between them.</p>
+            <p>The time between entering the scope of a variable and executing its declaration is called
+            the temporal dead zone (TDZ) of that variable:</p>
+            <ul>
+              <li>During this time, the variable is considered to be uninitialized (as if that were a
+              special value it has).</li>
+              <li>If you access an uninitialized variable, you get a ReferenceError.</li>
+              <li>Once you reach a variable declaration, the variable is set to either the value of
+              the initializer (specified via the assignment symbol) or undefined – if there is no
+              initializer.</li>
+            </ul>
+            <p>The following code illustrates the temporal dead zone:</p>
+
+<pre><code>  if (true) { // entering scope of `tmp`, TDZ starts
+    // `tmp` is uninitialized:
+    assert.throws(() => (tmp = 'abc'), ReferenceError);
+    assert.throws(() => console.log(tmp), ReferenceError);
+    let tmp; // TDZ ends
+    assert.equal(tmp, undefined);
+  }
+</code></pre>
+
+            <p>The next example shows that the temporal dead zone is truly temporal (related to time):</p>
+
+<pre><code>  if (true) { // entering scope of `myVar`, TDZ starts
+    const func = () => {
+      console.log(myVar); // executed later
+    };
+
+    // We are within the TDZ:
+    // Accessing `myVar` causes `ReferenceError`
+
+    let myVar = 3; // TDZ ends
+    func(); // OK, called outside TDZ
+  }
+</code></pre>
+
+            <p>Even though func() is located before the declaration of myVar and uses that variable, we
+            can call func(). But we have to wait until the temporal dead zone of myVar is over.</p>
+          </section>
+          
+          <section class="content__section content__section--secondary" id="item-11-8-2">
+            <h5>Function declarations and early activation</h5>
+
+            <figure class="border-start border-3 border-dark ps-3 pt-2">
+              <blockquote class="blockquote">
+                <h6><i class="fa-solid fa-eye"></i>&nbsp;More information on functions</h6>
+              </blockquote>
+              <figcaption class="blockquote-footer py-2">
+                In this section, we are using functions – before we had a chance to learn them properly. Hopefully, everything still
+                makes sense. Whenever it doesn't, please see §25
+                "Callable values".
+              </figcaption>
+            </figure>
+
+            <p>A function declaration is always executed when entering its scope, regardless of where it
+            is located within that scope. That enables you to call a function foo() before it is declared:</p>
+
+<pre><code>  assert.equal(foo(), 123); // OK
+  function foo() { return 123; }
+</code></pre>
+
+            <p>The early activation of foo() means that the previous code is equivalent to:</p>
+
+<pre><code>  function foo() { return 123; }
+  assert.equal(foo(), 123);
+</code></pre>
+
+            <p>If you declare a function via const or let, then it is not activated early. In the following
+            example, you can only use bar() after its declaration.</p>
+
+<pre><code>  assert.throws(
+    () => bar(), // before declaration
+    ReferenceError);
+
+  const bar = () => { return 123; };
+
+  assert.equal(bar(), 123); // after declaration
+</code></pre>
+
+          <section class="content__section content__section--tertiary">
+            <h6>Calling ahead without early activation</h6>
+
+            <p>Even if a function g() is not activated early, it can be called by a preceding function f()
+            (in the same scope) if we adhere to the following rule: f() must be invoked after the
+            declaration of g().</p>
+
+<pre><code>  const f = () => g();
+  const g = () => 123;
+
+  // We call f() after g() was declared:
+  assert.equal(f(), 123);
+</code></pre>
+
+            <p>The functions of a module are usually invoked after its complete body is executed. Therefore, in modules, you rarely
+            need to worry about the order of functions</p>
+            <p>Lastly, note how early activation automatically keeps the aforementioned rule: when
+            entering a scope, all function declarations are executed first, before any calls are made.</p>
+          </section>
+
+          <section class="content__section content__section--tertiary">
+            <h6>A pitfall of early activation</h6>
+
+            <p>If you rely on early activation to call a function before its declaration, then you need to
+            be careful that it doesn't access data that isn't activated early.</p>
+
+<pre><code>  funcDecl();
+  const MY_STR = 'abc';
+  function funcDecl()
+
+    assert.throws(
+      () => MY_STR,
+      ReferenceError);
+  }
+</code></pre>
+
+            <p>The problem goes away if you make the call to funcDecl() after the declaration of MY_STR.</p>
+          </section>
+
+          <section class="content__section content__section--tertiary">
+            <h6>The pros and cons of early activation</h6>
+
+            <p>We have seen that early activation has a pitfall and that you can get most of its benefits
+            without using it. Therefore, it is better to avoid early activation. But I don't feel strongly
+            about this and, as mentioned before, often use function declarations because I like their
+            syntax.</p>
+          </section>
+          
+          <section class="content__section content__section--secondary" id="item-11-8-3">
+            <h5>Class declarations are not activated early</h5>
+
+            <p>Even though they are similar to function declarations in some ways, class declarations
+            are not activated early:</p>
+
+<pre><code>  assert.throws(
+    () => new MyClass(),
+    ReferenceError);
+
+  class MyClass {}
+
+  assert.equal(new MyClass() instanceof MyClass, true);
+</code></pre>
+
+            <p>Why is that? Consider the following class declaration:</p>
+
+<pre><code>  class MyClass extends Object {}
+</code></pre>
+
+            <p>The operand of extends is an expression. Therefore, you can do things like this:</p>
+
+<pre><code>  const identity = x => x;
+  class MyClass extends identity(Object) {}
+</code></pre>
+
+            <p>Evaluating such an expression must be done at the location where it is mentioned. Anything else would be confusing.
+            That explains why class declarations are not activated
+            early.</p>
+          </section>
+          
+          <section class="content__section content__section--secondary" id="item-11-8-4">
+            <h5>var: hoisting (partial early activation)</h5>
+
+            <p>var is an older way of declaring variables that predates const and let (which are preferred now). Consider the
+            following var declaration</p>
+
+<pre><code>  var x = 123;
+</code></pre>
+
+            <p>This declaration has two parts:</p>
+            <ul>
+              <li>Declaration var x: The scope of a var-declared variable is the innermost surrounding function and not the innermost
+              surrounding block, as for most other declarations. Such a variable is already active at the beginning of its scope and
+              initialized
+              with undefined.</li>
+              <li>Assignment x = 123: The assignment is always executed in place.</li>
+            </ul>
+            <p>The following code demonstrates the effects of var:</p>
+
+<pre><code>  function f() {
+    // Partial early activation:
+    assert.equal(x, undefined);
+    if (true) {
+      var x = 123;
+      // The assignment is executed in place:
+      assert.equal(x, 123);
+    }
+    // Scope is function, not block:
+    assert.equal(x, 123);
+  }
+</code></pre>
+          </section>
+        </section>
+
+        <section class="content__section content__section--primary" id="item-11-9">
+          <h4>Closures</h4>
+
+          <p>Before we can explore closures, we need to learn about bound variables and free variables.</p>
+
+          <section class="content__section content__section--secondary" id="item-11-9-1">
+            <h5>Bound variables vs. free variables</h5>
+
+            <p>Per scope, there is a set of variables that are mentioned. Among these variables we distinguish:</p>
+            <ul>
+              <li>Bound variables are declared within the scope. They are parameters and local variables.</li>
+              <li>Free variables are declared externally. They are also called non-local variables.</li>
+            </ul>
+            <p>Consider the following code:</p>
+
+<pre><code>  function func(x) {
+    const y = 123;
+    console.log(z);
+  }
+</code></pre>
+
+            <p>In the body of func(), x and y are bound variables. z is a free variable.</p>
+          </section>
+          
+          <section class="content__section content__section--secondary" id="item-11-9-2">
+            <h5>What is a closure?</h5>
+
+            <p>What is a closure then?</p>
+            <figure class="ps-3 pt-2">
+              <blockquote class="blockquote">
+                A closure is a function plus a connection to the variables that exist at its "birth
+                place".
+              </blockquote>
+            </figure>
+            <p>What is the point of keeping this connection? It provides the values for the free variables
+            of the function – for example:</p>
+
+<pre><code>  function funcFactory(value) {
+    return () => {
+      return value;
+    };
+  }
+
+  const func = funcFactory('abc');
+  assert.equal(func(), 'abc'); // (A)
+</code></pre>
+
+            <p>funcFactory returns a closure that is assigned to func. Because func has the connection
+            to the variables at its birth place, it can still access the free variable value when it is called
+            in line A (even though it "escaped" its scope).</p>
+            <figure class="border-start border-3 border-dark ps-3 pt-2">
+              <blockquote class="blockquote">
+                <h6><i class="fa-regular fa-lightbulb"></i>&nbsp;All functions in JavaScript are closures</h6>
+              </blockquote>
+              <figcaption class="blockquote-footer py-2">
+                Static scoping is supported via closures in JavaScript. Therefore, every function is
+                a closure.
+              </figcaption>
+            </figure>
+          </section>
+          
+          <section class="content__section content__section--secondary" id="item-11-9-3">
+            <h5>Example: A factory for incrementors</h5>
+
+            <p>The following function returns incrementors (a name that I just made up). An incrementor
+            is a function that internally stores a number. When it is called, it updates that number
+            by adding the argument to it and returns the new value.</p>
+
+<pre><code>  function createInc(startValue) {
+    return (step) => { // (A)
+      startValue += step;
+      return startValue;
+    };
+  }
+  const inc = createInc(5);
+  assert.equal(inc(2), 7);
+</code></pre>
+
+            <p>We can see that the function created in line A keeps its internal number in the free variable
+              startValue. This time, we don't just read from the birth scope, we use it to store data
+              that we change and that persists across function calls.</p>
+            <p>We can create more storage slots in the birth scope, via local variables:</p>
+
+<pre><code>  function createInc(startValue) {
+  let index = -1;
+    return (step) => {
+      startValue += step;
+      index++;
+      return [index, startValue];
+    };
+  }
+  const inc = createInc(5);
+  assert.deepEqual(inc(2), [0, 7]);
+  assert.deepEqual(inc(2), [1, 9]);
+  assert.deepEqual(inc(2), [2, 11])
+</code></pre>
+          </section>
+
+          <section class="content__section content__section--secondary" id="item-11-9-4">
+            <h5>Use cases for closures</h5>
+
+            <p>What are closures good for?</p>
+            <ul>
+              <li>For starters, they are simply an implementation of static scoping. As such, they
+              provide context data for callbacks.</li>
+              <li>They can also be used by functions to store state that persists across function calls.
+              createInc() is an example of that.</li>
+              <li>And they can provide private data for objects (produced via literals or classes).
+              The details of how that works are explained in Exploring ES6.</li>
+            </ul>
+            <figure class="border-start border-3 border-dark ps-3 pt-2">
+              <blockquote class="blockquote">
+                <h6><i class="fa-solid fa-list"></i>&nbsp;Quiz: advanced</h6>
+              </blockquote>
+              <figcaption class="blockquote-footer py-2">
+                See quiz app.
+              </figcaption>
+            </figure>
+          </section>
+        </section>
+        </div>
+
+        <footer class="bg-light text-center text-lg-start">
+          <div class="container p-5">
+            <div class="row flex-center">
+              <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase">Links</h5>
+        
+                <ul class="list-unstyled mb-0">
+                  <li>
+                    <a href="#" class="text-dark">Link 1</a>
+                  </li>
+                  <li>
+                    <a href="#" class="text-dark">Link 2</a>
+                  </li>
+                  <li>
+                    <a href="#" class="text-dark">Link 3</a>
+                  </li>
+                  <li>
+                    <a href="#" class="text-dark">Link 4</a>
+                  </li>
+                </ul>
+              </div>
+  
+              <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <h5 class="text-uppercase mb-0">Links</h5>
+        
+                <ul class="list-unstyled">
+                  <li>
+                    <a href="#" class="text-dark">Link 1</a>
+                  </li>
+                  <li>
+                    <a href="#" class="text-dark">Link 2</a>
+                  </li>
+                  <li>
+                    <a href="#" class="text-dark">Link 3</a>
+                  </li>
+                  <li>
+                    <a href="#" class="text-dark">Link 4</a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                <h5 class="text-uppercase">Footer text</h5>
+                  <p>
+                    The page was inspired by the chapter <q>Variables and assignment</q> of a book <q>JavaScript For Impatient Programmers (ES2022 Edition)</q>.
+                  </p>
+                  <p>
+                    PDF version of a book can be found <a href="https://exploringjs.com/impatient-js/downloads/impatient-js-preview-book.pdf">HERE</a>
+                  </p>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2022 Copyright:
+            <a class="text-dark" href="https://my-js-tutorial.com/">my-js-tutorial.com</a>
+          </div>
+        </footer>
+      </article>
+    </div>
+  </div>
+</main>
+</body>
+</html>

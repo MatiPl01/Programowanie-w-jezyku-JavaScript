@@ -14,7 +14,7 @@
         integrity="sha512-10/jx2EXwxxWqCLX/hHth/vu2KY3jCF70dCQB8TSgNjbCVAC/8vai53GfMDrO2Emgwccf2pJqxct9ehpzG+MTw=="
         crossorigin="anonymous" 
         referrerpolicy="no-referrer">
-  <link rel="stylesheet" href="./css/styles.css">
+  <link rel="stylesheet" href="../css/styles.css">
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
           integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" 
@@ -22,9 +22,9 @@
           defer>
   </script>
 
-  <title>MyJsTutorial | Home</title>
+  <title>MyJsTutorial | Contact</title>
 </head>
-<body class="home-page">
+<body class="contact-page">
   <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top shadow">
     <div class="container-fluid">
       <a class="navbar-brand" href="../index.html">MyJsTutorial</a>
@@ -35,19 +35,19 @@
       <div class="collapse navbar-collapse" id="nav-toggle">
         <ul class="navbar-nav me-auto mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active disabled" aria-current="page" href="#">Home</a>
+            <a class="nav-link" href="../index.html">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./pages/tutorial.html">Tutorial</a>
+            <a class="nav-link" href="./tutorial.html">Tutorial</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./pages/about.html" tabindex="-1">About</a>
+            <a class="nav-link" href="./about.html">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./pages/contact.html" tabindex="-1">Contact</a>
+            <a class="nav-link active disabled" href="#" tabindex="-1" aria-current="page">Contact</a>
           </li>
         </ul>
-        <form class=" d-flex">
+        <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
@@ -56,44 +56,69 @@
   </nav>
 
   <main>
-    <div id="carousel" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true"
-          aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <div class="container-fluid">
+      <div class="container">
+        <div>
+          <h2 class="text-center mb-5 border-bottom p-3">Contact me</h2>
+        </div>
+
+        <div class="row">
+          <form class="col-md-7 shadow rounded p-5 mb-5" action="#">
+            <div class="form-row row">
+              <div class="form-group mb-3 col-md-6">
+                <label for="first-name">First name</label>
+                <input type="text" name="first-name" class="form-control" id="first-name" placeholder="First name" required>
+              </div>
+              <div class="form-group mb-3 col-md-6">
+                <label for="last-name">Last name</label>
+                <input type="text" name="last-name" class="form-control" id="last-name" placeholder="Last name" required>
+              </div>
+            </div>
+            <div class="form-row mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" name="email" class="form-control" id="email" placeholder="example@email.com" required>
+            </div>
+            <div class="form-row mb-3">
+              <label for="subject" class="form-label">Subject</label>
+              <input type="text" name="subject" class="form-control" id="subject" placeholder="subject" required>
+            </div>
+            <div class="form-row mb-3">
+              <label for="message" class="form-label">Message</label>
+              <textarea name="message" class="form-control" id="message" rows="3" placeholder="Message" required></textarea>
+            </div>
+
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmation">
+              Send
+            </button>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="confirmation" tabindex="-1" aria-labelledby="confirmation-label" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="confirmation-label">Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Do you want to send a contact message?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <input type="submit" value="Yes" class="btn btn-primary">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <div class="col-md-5 d-flex align-items-end">
+            <div>
+              <img class="img-fluid" src="../images/contact/Hand_hold_mobile_phone_with_sending_email_or_message.jpg" alt="Sending email">
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active" data-bs-interval="4000">
-          <img src="images/home/laptop-2557576_1920.jpg" class="d-block w-100" alt="A man using a laptop">
-          <div class="carousel-caption d-none d-md-block">
-            <h5>Become a web developer</h5>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore suscipit nostrum facere dicta enim esse asperiores expedita reiciendis ratione ex?</p>
-          </div>
-        </div>
-        <div class="carousel-item" data-bs-interval="4000">
-          <img src="images/home/pexels-kevin-ku-577585.jpg" class="d-block w-100" alt="Monitor displaying code and glasses">
-          <div class="carousel-caption d-none d-md-block">
-            <h5>Learn good practices</h5>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis vero quasi, et quam fuga saepe.</p>
-          </div>
-        </div>
-        <div class="carousel-item" data-bs-interval="4000">
-          <img src="images/home/programming-1873854_1920.png" class="d-block w-100" alt="Javascript code">
-          <div class="carousel-caption d-none d-md-block">
-            <h5>Start learning JavaScript now</h5>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis provident aliquam dolorem suscipit at officiis mollitia deserunt ratione.</p>
-          </div>
-        </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
     </div>
   </main>
 

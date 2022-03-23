@@ -1,3 +1,47 @@
+$nav-heigh: 56px;
+$content-height: calc(100vh - $nav-heigh);
+
+/*
+ * Global Styles
+ */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: $nav-heigh;
+}
+
+main {
+  flex-grow: 1;
+}
+
+/*
+ * Home Page
+ */
+.home-page {
+  .carousel {
+    overflow: hidden;
+
+    &, &-inner {
+      height: $content-height;
+    }
+
+    &-item {
+      transition: transform 1s ease, opacity .5s ease-out;
+      height: 100%;
+
+      img {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+      }
+    }
+  }
+}
+
+/*
+ * Tutorial page
+ */
 .coursebook {
   ol {
     list-style-type: none;
@@ -13,16 +57,11 @@
   }
 
   .toc {
-    padding: 0 !important;
-
-    &__list {
-      height: calc(100vh - 136px);
-      flex-wrap: nowrap;
-    }
+    height: $content-height;
   }
 
   .content {
-    height: calc(100vh - 56px);
+    height: $content-height;
     overflow-y: auto;
     scroll-behavior: smooth;
 
@@ -58,9 +97,17 @@
   }
 
   @media (max-width: 768px) {
-    .toc__list,
+    .toc,
     .content {
       height: auto;
     }
   }
+}
+
+/*
+ * About page
+ */
+.about-page .img-container {
+  height: $content-height;
+  padding-top: $nav-heigh;
 }
