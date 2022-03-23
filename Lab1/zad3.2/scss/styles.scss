@@ -1,38 +1,66 @@
-ol {
-  list-style-type: none;
-  counter-reset: item;
+.coursebook {
+  ol {
+    list-style-type: none;
+    counter-reset: item;
 
-  & > li {
-    counter-increment: item;
+    & > li {
+      counter-increment: item;
 
-    a::before {
-      content: counters(item, ".")" ";
+      a::before {
+        content: counters(item, ".")". ";
+      }
     }
   }
-}
 
-.toc {
-  &__nav {
-    // height: 100vh;
+  .toc {
     padding: 0 !important;
-  }
 
-  &__list {
-    height: calc(100vh - 80px);
-
-    &,
-    & > li > ol {
-      padding: 0;
-    }
-
-    & > li::before {
-      display: none;
+    &__list {
+      height: calc(100vh - 136px);
+      flex-wrap: nowrap;
     }
   }
 
-  &__content {
-    height: 100vh;
+  .content {
+    height: calc(100vh - 56px);
     overflow-y: auto;
     scroll-behavior: smooth;
+
+    counter-reset: primary;
+
+    &__section {
+      &--primary {
+        counter-increment: primary;
+        counter-reset: secondary;
+
+        h4::before {
+          content: counter(primary)". ";
+        }
+      }
+
+      &--secondary {
+        counter-increment: secondary;
+        counter-reset: tertiary;
+
+        h5::before {
+          content: counter(primary)"."counter(secondary)". ";
+        }
+      }
+
+      &--tertiary {
+        counter-increment: tertiary;
+
+        h6::before {
+          content: counter(primary)"."counter(secondary)"."counter(tertiary)". ";
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .toc__list,
+    .content {
+      height: auto;
+    }
   }
 }
