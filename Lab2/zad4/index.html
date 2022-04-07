@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Zadanie 4</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/mocha/mocha.css">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  <article class="box">
+    <form class="form" name="input-form" action="#">
+      <label class="form__label" for="input">Wpisz polecenie:</label>
+      <textarea class="form__input" name="input" id="input" cols="30" rows="10"></textarea>
+      <input class="form__button form__button--submit" id="input-submit" type="submit" value="Wykonaj">
+    </form>
+    
+    <menu class="menu">
+      <div class="menu__group">
+        <h2 class="menu__heading">Local Storage</h2>
+        <div class="menu__buttons">
+          <button class="menu__button menu__button--save-local">Zapisz</button>
+          <button class="menu__button menu__button--load-local">Wczytaj</button>
+        </div>
+      </div>
+    
+      <div class="menu__group">
+        <h2 class="menu__heading">Session Storage</h2>
+        <div class="menu__buttons">
+          <button class="menu__button menu__button--save-session">Zapisz</button>
+          <button class="menu__button menu__button--load-session">Wczytaj</button>
+        </div>
+      </div>
+    </menu>
+  </article>
+
+  <div id="mocha">
+  </div>
+  <script src="script.js"></script>
+  <script src="https://unpkg.com/chai/chai.js"></script>
+  <script src="https://unpkg.com/mocha/mocha.js"></script>
+  <script class="mocha-init">
+    mocha.setup('bdd')
+    mocha.checkLeaks()
+  </script>
+  <script src="script.spec.js"></script>
+  <script class="mocha-exec">
+    mocha.run()
+  </script>
+</body>
+
+</html>
