@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tytuł strony</title>
+</head>
+<body>
+  <header class="azure border shadow">
+    <h1>
+      Tytuł strony
+    </h1>
+  </header>
+
+  <nav class="azure border shadow">
+    <ul>
+      <li>
+        <a href="">Element 1</a>
+      </li>
+
+      <li>
+        <a href="">Element 2</a>
+      </li>
+    </ul>
+  </nav>
+
+  <aside class="azure border shadow">
+    <h1>
+      Panel boczny
+    </h1>
+    <h2>
+      Ciekawe odsyłacze
+    </h2>
+    <ul>
+      <li>
+        <a href="">Odsyłacz 1</a>
+      </li>
+
+      <li>
+        <a href="">Odsyłacz 2</a>
+      </li>
+
+      <li>
+        <a href="">Odsyłacz 3</a>
+      </li>
+    </ul>
+  </aside>
+
+  <main class="azure border shadow">
+    <h1>
+      Treść strony
+    </h1>
+
+    <blockquote>
+      <p>Natenczas Wojski chwycił na taśmie przypięty</p>
+      <p>Swój róg bawoli, długi, cętkowany, kręty</p>
+      <p>Jak wąż boa, oburącz do ust go przycisnął,</p>
+      <p>Wzdął policzki jak banię, w oczach krwią zabłysnął,</p>
+      <p>Zasunął wpół powieki, wciągnął w głąb pół brzucha</p>
+      <p>I do płuc wysłał z niego cały zapas ducha,</p>
+      <p>I zagrał: róg jak wicher, wirowatym dechem</p>
+      <p>Niesie w puszczę muzykę i podwaja echem.</p>
+
+      <br>
+
+      <p>Umilkli strzelcy, stali szczwacze zadziwieni</p>
+      <p>Mocą, czystością, dziwną harmoniją pieni.</p>
+      <p>Starzec cały kunszt, którym niegdyś w lasach słynął,</p>
+      <p>Jeszcze raz przed uszami myśliwców rozwinął;</p>
+      <p>Napełnił wnet, ożywił knieje i dąbrowy,</p>
+      <p>Jakby psiarnię w nie wpuścił i rozpoczął łowy.</p>
+
+      <br>
+
+      <p>Bo w graniu była łowów historyja krótka:</p>
+      <p>Zrazu odzew dźwięczący, rześki: to pobudka;</p>
+      <p>Potem jęki po jękach skomlą: to psów granie;</p>
+      <p>A gdzieniegdzie ton twardszy jak grzmot: to strzelanie.</p>
+    </blockquote>
+  </main>
+
+  <menu>
+    <button id="btn-set">Ustaw</button>
+    <button id="btn-unset">Skasuj</button>
+  </menu>
+
+  <footer class="azure border shadow">
+    <a href="mailto:lopacinski@student.agh.edu.pl">Mateusz Łopaciński</a>
+  </footer>
+
+  <script src="sheet.js"></script>
+  <script>
+    (() => {
+      const setBtnEl = document.querySelector('#btn-set')
+      const unsetBtnEl = document.querySelector('#btn-unset')
+
+      setBtnEl.addEventListener('click', loadStyleSheet)
+      unsetBtnEl.addEventListener('click', removeStyleSheet)
+    })()
+  </script>
+</body>
+
+</html>

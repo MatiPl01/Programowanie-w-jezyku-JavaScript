@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>zadanie 2</title>
+  <script src="script.js" defer></script>
+
+  <style>
+    input[type=button] {
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <form>
+    <input type="button" value="Start" id="btn-start" />
+    <input type="button" value="Stop" id="btn-stop">
+    <input type="number" name="delay" id="input-delay" min="10" max="10000" value="100">
+  </form>
+
+  <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+</html>

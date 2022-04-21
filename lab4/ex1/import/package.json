@@ -1,0 +1,12 @@
+{
+  "name": "zad1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "node index.js 5 2"
+  },
+  "author": "",
+  "license": "ISC"
+}
