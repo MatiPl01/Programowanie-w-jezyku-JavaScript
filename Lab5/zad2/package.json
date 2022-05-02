@@ -1,0 +1,31 @@
+{
+  "name": "zad2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "npm run app2",
+    "app1": "echo \"Uruchamiam aplikację nr 1\" && node ./app1.js",
+    "app2": "echo \"Uruchamiam aplikację nr 2\" && node ./app2.js",
+    "test1": "env APP_NAME=app1 mocha",
+    "test2": "env APP_NAME=app2 mocha"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "chai-json": "^1.0.0",
+    "mocha": "^10.0.0",
+    "nodemon": "^2.0.16",
+    "supertest": "^6.2.3"
+  },
+  "dependencies": {
+    "express": "^4.18.1",
+    "morgan": "^1.10.0",
+    "pug": "^3.0.2"
+  }
+}
