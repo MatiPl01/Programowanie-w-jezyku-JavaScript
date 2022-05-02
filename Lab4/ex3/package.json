@@ -1,0 +1,22 @@
+{
+  "name": "zad3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "type": "module",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "start": "nodemon ./server.js",
+    "test": "mocha ./test3.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^9.2.2",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.2"
+  }
+}
