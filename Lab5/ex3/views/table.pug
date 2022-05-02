@@ -1,0 +1,14 @@
+block table
+  table
+    tr 
+      th x 
+      th Operation 
+      th y 
+      th Result 
+
+    each comp in computed
+      tr 
+        td #{comp.x}
+        td #{comp.op}
+        td #{comp.y}
+        td #{comp.result}
