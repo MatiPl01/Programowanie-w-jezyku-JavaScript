@@ -1,0 +1,25 @@
+doctype html
+html 
+  head
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title Shop summary
+  body
+    table
+      tr
+        th Towar
+        th Liczba dostępnych
+        th Wartość
+        th Nazwiska kupujących
+
+      each row in summary 
+        tr
+          td #{row.product}
+          td #{row.stock}
+          td #{row.price}
+          td
+            table
+              each buyer in row.buyers
+                tr
+                  td #{buyer}
