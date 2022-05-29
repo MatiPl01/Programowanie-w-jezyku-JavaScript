@@ -1,0 +1,15 @@
+{
+  "name": "zad1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server1.js",
+  "scripts": {
+    "dev": "nodemon server1.js",
+    "start": "node server1.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^2.0.16"
+  }
+}

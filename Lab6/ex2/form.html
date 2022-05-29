@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form</title>
+
+  <script defer>
+    const getFormData = () => {
+      const elements = document.forms[0].elements;
+
+      return {
+        area: elements['area'].value,
+        location: elements['location'].value
+      }
+    };
+
+    const updateMessage = (id, message) => {
+      const textNode = document.getElementById(id).childNodes[0];
+      textNode.nodeValue = message;
+    };
+
+    const fetchRemoteData = async () => {
+      const { area, location } = getFormData();
+      if (!area?.length || !location?.length) {
+        return updateMessage('remote', 'Input data not provided');
+      }
+
+      const url = `http://worldtimeapi.org/api/timezone/${area}/${location}`;
+      updateMessage('remote', 'Downloading data');
+
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(res.statusText);
+        
+        const json = await res.json();
+        updateMessage('remote', json.datetime);
+      } catch (err) {
+        if (err === 'This website is currently experiencing high load.') {
+          updateMessage('remote', 'The server is overloaded');
+        } else {
+          updateMessage('remote', err.message);
+        }
+        console.error(err);
+      }
+    };
+
+    const fetchLocalData = async () => {
+      const url = `http://localhost:8081/`;
+      const containerEl = document.getElementById('local');
+      containerEl.replaceChildren(document.createTextNode('Downloading data'));
+
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(res.statusText);
+
+        const html = await res.text();
+        while (containerEl.firstChild) containerEl.removeChild(containerEl.lastChild);
+        containerEl.insertAdjacentHTML('afterbegin', html);
+      } catch (err) {
+        updateMessage('local', 'Server is currently offline');
+        console.error(err);
+      }
+    };
+
+    const loadTimeData = () => {
+      fetchRemoteData();
+      fetchLocalData();
+    };
+  </script>
+</head>
+<body>
+  <form>
+    <input type="text" name="area" id="area" placeholder="Area">
+    <input type="text" name="location" id="location" placeholder="Location">
+    <input type="button" value="Pobierz" onclick="loadTimeData()">
+  </form>
+
+  <h1>Remote</h1>
+  <div id='remote'>
+    Remote date and time
+  </div>
+  <!-- ***************** -->
+  <h1>Local</h1>
+  <div id='local'>
+    Local date and time
+  </div>
+</body>
+</html>

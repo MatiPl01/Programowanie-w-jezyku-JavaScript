@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>
+    Form
+  </title>
+  <script>
+    /****************************************************************************/
+    /* Function that performs (asynchronous) query to the web server using AJAX */
+    /****************************************************************************/
+    function requestAJAX(method, params) {
+      method = method.toUpperCase();
+      //-----------------------------------------------
+      // Create an object representing the request to the web server — see https://developer.mozilla.org/docs/Web/API/XMLHttpRequest
+      //-----------------------------------------------
+      var xhr = new XMLHttpRequest();
+
+      //-----------------------------------------------
+      // Registration of a (user) function that will process the response received from the server
+      //-----------------------------------------------
+
+      // *********************
+      // *** The first way ***
+      // *********************
+
+      xhr.onreadystatechange = function () {
+        if (this.readyState !== XMLHttpRequest.DONE) return; // If the response is ready
+        if (this.status == 200) {                           // If the request was correct
+          if (this.getResponseHeader('content-type') !== 'application/xml') {
+            // If the received data is plain text or a JSON document
+            var received_data = this.responseText; // Get a response in the form of a string
+            window.alert(received_data);           // and display it
+          }
+          else {
+            // If the received data is an XML document
+            var xmlDoc = this.responseXML; // Get the response in the form of an "XmlDocument" object that can be accessed through DOM methods — see https://www.w3.org/TR/domcore/
+            window.alert(xmlDoc);
+            console.log(xmlDoc);
+          }
+        }
+        else window.alert('There was a problem with this request.');
+      };
+
+      // If you want a response in a specific format, e.g. JSON or ArrayBuffer, use the "response" property instead of "responseText" and "responseXML" — see the example at https://webplatform.github.io/docs/apis/xhr/XMLHttpRequest/responseType/
+
+      // **********************
+      // *** The second way ***
+      // **********************
+
+      // xhr.onreadystatechange = function () { response(xhr); } // The 'response()' function is defined below
+
+      //-----------------------------------------------
+      // Execution of the (asynchronous) query to the web server
+      //-----------------------------------------------
+      const query = parseQuery(params);
+
+      switch (method) {
+        case 'GET':
+          xhr.open('GET', `/submit${query ? '?' + query : ''}`, true);
+          xhr.send(null);
+          break;
+
+        case 'POST':
+          xhr.open('POST', `/submit`, true);
+          xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+          xhr.send(query);
+          break;
+      }
+
+      // Examples of the use of the above methods — see https://www.w3schools.com/xml/ajax_xmlhttprequest_send.asp
+      // Example of sending XML data  — see https://www.webucator.com/how-to/how-send-receive-xml-data-from-the-server.cfm
+    }
+
+    /*****************************************************************/
+    /* The function that processes the AJAX response from the server */
+    /*****************************************************************/
+    function response(xhr) {
+      if (xhr.readyState == XMLHttpRequest.DONE) { // If the response is ready
+        if (xhr.status == 200) {                   // If the request was correct
+          if (xhr.getResponseHeader('content-type') !== 'application/xml') {
+            // If the received data is plain text or a JSON document
+            var received_data = xhr.responseText; // Get a response in the form of a string
+            window.alert(received_data);          // and display it
+          }
+          else {
+            //If the received data is an XML document
+            var xmlDoc = xhr.responseXML; // Get the response in the form of an "XmlDocument" object that can be accessed through DOM methods — see https://www.w3.org/TR/domcore/
+            window.alert(xmlDoc);
+            console.log(xmlDoc);
+          }
+        }
+      }
+      else
+        window.alert('There was a problem with this request.');
+    }
+
+    /*********************************************************************************/
+    /* Function that performs (asynchronous) query to the web server using Fetch API */
+    /*********************************************************************************/
+    function requestFetchAPI(method, params) {
+      method = method.toUpperCase();
+      const query = parseQuery(params);
+      const uri = query ? `?${query}` : '';
+      const options = {
+        method,
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        ...(method === 'POST' && { body: query })
+      };
+
+      fetch(`/submit${uri}`, options) // Execution of the (asynchronous) query to the web server — a promise is created
+        .then(function (response) { // if the promise is fulfilled
+          if (!response.ok) throw new Error(response.statusText);
+          if (response.headers.get("Content-Type") !== 'application/json')
+            // If the received data is plain text or an XML document
+            return response.text()
+          else
+            //If the received data is a JSON document
+            return response.json()
+        })
+        .then(res => window.alert(res))
+        .catch(function (error) { // if the promise is rejected
+          window.alert(error);
+        });
+    }
+
+    /***********************************************/
+    /* Same as above but using 'async' and 'await' */
+    /***********************************************/
+
+    /*
+    async function requestFetchAPI() {
+      try {
+        response = await fetch('/submit'); // Execution of the (asynchronous) query to the web server — a promise is created
+        // If the promise is fulfilled, then 'response' has a value
+        if (!response.ok)
+          throw Error(response.statusText);
+        if (response.headers.get("Content-Type") !== 'application/json')
+          // If the received data is plain text or an XML document
+          window.alert(response.text()); // show the Promise object
+        else
+          //If the received data is a JSON document
+          window.alert(response.json()); // show the Promise object
+      }
+      catch (error) { // if the promise is rejected
+        window.alert(error);
+      }
+    }
+    */
+
+    const createQueryParams = () => {
+      return {
+        'imie': document.getElementById('imie')?.value || ''
+      }
+    };
+
+    const parseQuery = params => {
+      return Object.entries(params)
+        .map(([k, v]) => `${k}=${v}`)
+        .join('&');
+    };
+  </script>
+</head>
+
+<body>
+  <main>
+    <form>
+      <input type="text" name="imie" id="imie">
+      <input type="button" value="AJAX (GET)" onclick="requestAJAX('GET', createQueryParams())">
+      <input type="button" value="AJAX (POST)" onclick="requestAJAX('POST', createQueryParams())">
+      <input type="button" value="Fetch API (GET)" onclick="requestFetchAPI('GET', createQueryParams())">
+      <input type="button" value="Fetch API (POST)" onclick="requestFetchAPI('POST', createQueryParams())">
+    </form>
+  </main>
+</body>
+
+</html>
