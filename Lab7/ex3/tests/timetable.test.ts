@@ -1,6 +1,8 @@
-import { Timetable, Action, Meeting } from '../src/script';
 import { expect } from 'chai';
 import { describe } from 'mocha';
+import Timetable from '../src/classes/timetable';
+import Action from '../src/enums/action.enum';
+import Meeting from '../src/types/meeting.type';
 
 
 describe('Timetable', () => {

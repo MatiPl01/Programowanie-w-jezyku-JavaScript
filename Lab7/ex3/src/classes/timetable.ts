@@ -1,24 +1,6 @@
-enum Action {
-  DAY_EARLIER = 'Dzień wcześniej',
-  DAY_LATER = 'Dzień później',
-  HOUR_EARLIER = 'Godzinę wcześniej',
-  HOUR_LATER = 'Godzinę później'
-};
-
-type Meeting = {
-  title: string;
-  date: Date;
-  duration: number;
-  participants: string[];
-};
-
-interface ITimetable {
-  canBeTransferredTo(meeting: Meeting, date: Date): boolean;  // I modified this because only date as a parameter made no sense
-  busy(date: Date): boolean;
-  put(meeting: Meeting): boolean;
-  get(date: Date): Meeting | null;
-  perform(actions: Array<Action>): void;
-};
+import Meeting from '../types/meeting.type';
+import Action from '../enums/action.enum';
+import ITimetable from '../interfaces/timetable.interface';
 
 
 class TNode {
@@ -68,7 +50,7 @@ class TNode {
     return this.endDate <= date;
   }
 
-  public takesPlaceAt(date: Date): boolean {
+  public takesPlaceAt(date: Date): boolean { 
     return this.startDate <= date && date < this.endDate;
   }
 }
@@ -146,7 +128,7 @@ export default class Timetable implements ITimetable {
     const meetings = this.getNextMeetings(actions.length);
     const removedMeetings: Meeting[] = [];
     const updatedMeetings: Meeting[] = [];
-
+    
     for (let i = 0; i < Math.min(actions.length, meetings.length); i++) {
       const action = actions[i];
       if (!action) continue;
@@ -298,11 +280,4 @@ export default class Timetable implements ITimetable {
     }
     return true;
   }
-}
-
-
-export {
-  Timetable,
-  Action,
-  Meeting
 }
