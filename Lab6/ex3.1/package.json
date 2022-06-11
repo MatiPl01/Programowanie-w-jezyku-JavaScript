@@ -1,12 +1,13 @@
 {
-  "name": "zad1",
+  "name": "ex3.1",
   "version": "1.0.0",
   "description": "",
-  "main": "server1.js",
+  "main": "server.js",
   "scripts": {
     "dev": "nodemon server1.js",
     "start": "node server1.js"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {

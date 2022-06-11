@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oceny studentów</title>
+
+  <script defer>
+    const $ = selector => document.querySelector(selector);
+
+    const createTableHTML = (headers, data) => {
+      return `
+        <table>
+          <tr>
+            ${headers.map(header => '<th>' + header + '</th>').join('')}
+          </tr>
+          ${data.map(row => {
+            return '<tr>' + row.map(column => '<td>' + column + '</td>').join('') + '</tr>';
+          }).join('')}
+        </table>
+      `
+    };
+
+    const renderTable = (headers, data) => {
+      const html = createTableHTML(headers, data);
+      $('#container').innerHTML = html;
+    };
+
+    const displayData = json => {
+      renderTable([
+        'Nr albumu',
+        'Imię',
+        'Nazwisko',
+        'Przedmiot',
+        'Ocena'
+      ], json.map(student => [
+        student.album,
+        student.firstName,
+        student.lastName,
+        student.subject || '',
+        student.grade || ''
+      ]));
+    };
+
+    const postData = data => {
+      const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: JSON.stringify(data)
+      };
+
+      fetch('/submit', options)
+        .then(res => {
+          if (!res.ok) throw new Error(res.statusText);
+          return res.json();
+        })
+        .then(displayData)
+        .catch(error => window.alert(error));
+    };
+
+    const sendData = () => {
+      const input = $('#input').value;
+      if (!input.length) return alert('Nieprawidłowa liczba wartości');
+      
+      const data = input.split(',').map(part => part.trim());
+      if (data.length == 3) {
+        // Student data input
+        if (isNaN(data[2])) {
+          const [album, firstName, lastName] = data;
+          postData({ album, firstName, lastName });
+        // Student grade input
+        } else {
+          const [album, subject, grade] = data;
+          if (+grade < 2 || +grade > 5) {
+            return alert('Grade must be between 2 and 5');
+          }
+          postData({ album, subject, grade });
+        }
+      } else if (data.length === 1) {
+        // Remove the student
+        const album = data[0];
+        postData({ album });
+      } else alert('Zła liczba wartości');
+    };
+
+  </script>
+</head>
+<body>
+  <div id="container"></div>
+  
+  <textarea name="input" id="input" cols="30" rows="10" placeholder="Wpisz dane w formacie CSV"></textarea>
+  <input type="submit" value="Wyślij" onclick="sendData()">
+</body>
+</html>

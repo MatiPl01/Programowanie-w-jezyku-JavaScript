@@ -75,9 +75,6 @@ http.createServer(function (request, response) {
         default:
           break;
       }
-
-    // Other cases
-
   } //switch
 }).listen(8080);
 
