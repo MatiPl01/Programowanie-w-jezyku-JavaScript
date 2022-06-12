@@ -60,6 +60,7 @@ const server = http.createServer((req, res) => {
             }
           }
 
+          res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
           res.end(createResponse());
         });
       }
@@ -88,8 +89,8 @@ const createResponse = () => {
         album,
         firstName: student.firstName,
         lastName: student.lastName,
-        subject: '-',
-        grade: '-'
+        subject: student.subject,
+        grade: student.grade
       });
     }
   });

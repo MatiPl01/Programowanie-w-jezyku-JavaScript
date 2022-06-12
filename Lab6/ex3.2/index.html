@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,8 +17,8 @@
             ${headers.map(header => '<th>' + header + '</th>').join('')}
           </tr>
           ${data.map(row => {
-            return '<tr>' + row.map(column => '<td>' + column + '</td>').join('') + '</tr>';
-          }).join('')}
+        return '<tr>' + row.map(column => '<td>' + column + '</td>').join('') + '</tr>';
+      }).join('')}
         </table>
       `
     };
@@ -27,7 +28,7 @@
       $('#container').innerHTML = html;
     };
 
-    const displayData = json => {
+    const displayData = json => {  // TODO display best students on canvas
       renderTable([
         'Nr albumu',
         'Imię',
@@ -43,11 +44,24 @@
       ]));
     };
 
+    const createObjXML = data => {
+      return `
+        <?xml version="1.0" encoding="UTF-8"?>
+        <root>
+        <element>
+          ${Object.entries(data).map(([key, value]) => {
+            return `<${key}>${value}</${key}>`
+          })}
+        </element>
+        </root>
+      `;
+    };
+
     const postData = data => {
       const options = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json; charset=utf-8' },
-        body: JSON.stringify(data)
+        headers: { 'Content-Type': 'application/xml; charset=utf-8' },
+        body: createObjXML(data)
       };
 
       fetch('/submit', options)
@@ -55,25 +69,45 @@
           if (!res.ok) throw new Error(res.statusText);
           return res.json();
         })
-        .then(data => {
-          console.log(data)
-          return data;
-        })
         .then(displayData)
         .catch(error => window.alert(error));
+    };
+
+    const sendXML = xml => {
+      const xhr = new XMLHttpRequest();
+      
+      // Set up the response handler
+      xhr.onreadystatechange = function () {
+        if (this.readyState !== XMLHttpRequest.DONE) return;
+        if (this.status == 200 && this.getResponseHeader('content-type') !== 'application/xml') {
+          const resXML = this.responseText;
+          const json = processResponseXML(resXML);
+          displayData(json);
+        }
+        else window.alert('There was a problem with this request.');
+      };
+
+      // Send the request
+      xhr.open('POST', `/submit`, true);
+      xhr.setRequestHeader('Content-Type', 'application/xml');
+      xhr.send(xml);
+    };
+
+    const processResponseXML = res => {
+      // TODO
     };
 
     const sendData = () => {
       const input = $('#input').value;
       if (!input.length) return alert('Nieprawidłowa liczba wartości');
-      
+
       const data = input.split(',').map(part => part.trim());
       if (data.length == 3) {
         // Student data input
         if (isNaN(data[2])) {
           const [album, firstName, lastName] = data;
           postData({ album, firstName, lastName });
-        // Student grade input
+          // Student grade input
         } else {
           const [album, subject, grade] = data;
           if (+grade < 2 || +grade > 5) {
@@ -90,10 +124,13 @@
 
   </script>
 </head>
+
 <body>
   <div id="container"></div>
-  
+
+  <canvas></canvas>
   <textarea name="input" id="input" cols="30" rows="10" placeholder="Wpisz dane w formacie CSV"></textarea>
   <input type="submit" value="Wyślij" onclick="sendData()">
 </body>
+
 </html>
