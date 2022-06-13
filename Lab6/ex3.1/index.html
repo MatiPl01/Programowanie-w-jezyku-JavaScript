@@ -77,7 +77,7 @@
         } else {
           const [album, subject, grade] = data;
           if (+grade < 2 || +grade > 5) {
-            return alert('Grade must be between 2 and 5');
+            return alert('Ocena musi wynosić między 2 a 5');
           }
           postData({ album, subject, grade });
         }

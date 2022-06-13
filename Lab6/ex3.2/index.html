@@ -28,73 +28,111 @@
       $('#container').innerHTML = html;
     };
 
-    const displayData = json => {  // TODO display best students on canvas
+    const renderCanvas = lines => {
+      const lineHeight = 25;
+      const canvas = $('#canvas');
+      canvas.width = 300;
+      canvas.height = lines.length ? (lines.length + 2) * lineHeight : 0;
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (!lines.length) return;
+      ctx.font = `${lineHeight * .75}px Arial`;
+      ctx.fillStyle = '#000';
+      
+      ctx.fillText('Najlepsze średnie', 0, lineHeight, 300);
+      ctx.font = `${lineHeight * .5}px Arial`;
+      ctx.fillText('Album   Średnia', 0, 2 * lineHeight, 300);
+      ctx.font = `${lineHeight * .75}px Arial`;
+      lines.forEach((line, i) => {
+        ctx.fillText(line.replace(/ /g, '   '), 0, (i + 3) * lineHeight, 300);
+      });
+
+      canvas.onclick = event => {
+        const rect = canvas.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        
+        const lineIdx = Math.round((y - 3 * lineHeight) / lineHeight);
+        deleteStudent(lines[lineIdx].split(/\s+/)[0]);
+      }
+    }
+
+    const displayData = students => {
       renderTable([
         'Nr albumu',
         'Imię',
         'Nazwisko',
         'Przedmiot',
         'Ocena'
-      ], json.map(student => [
+      ], students.map(student => [
         student.album,
         student.firstName,
         student.lastName,
-        student.subject || '-',
-        student.grade || '-'
+        student.subject,
+        student.grade
       ]));
+
+      displayBestStudents(students);
+    };
+
+    const displayBestStudents = students => {
+      const gradesSums = new Map();
+      students.forEach(({ album, grade }) => {
+        if (!gradesSums.has(album)) gradesSums.set(album, { sum: 0, count: 0 });
+        const gradesSumObj = gradesSums.get(album);
+        gradesSumObj.sum += grade;
+        gradesSumObj.count++;
+      });
+
+      // Calculate grades average of each student
+      const gradesAvgArr = [...gradesSums.entries()].map(([album, { sum, count }]) => {
+        return { album, avg: sum / count };
+      });
+      gradesAvgArr.sort(({ avg: avg1 }, { avg: avg2 }) => (avg2 || 0) - (avg1 || 0));
+
+      const bestAvgArr = gradesAvgArr.slice(0, 3).filter(({ avg }) => avg > 0);
+      renderCanvas(bestAvgArr.map(({ album, avg }) => `${album} ${avg.toFixed(2)}`));
     };
 
     const createObjXML = data => {
-      return `
-        <?xml version="1.0" encoding="UTF-8"?>
-        <root>
-        <element>
-          ${Object.entries(data).map(([key, value]) => {
-            return `<${key}>${value}</${key}>`
-          })}
-        </element>
-        </root>
-      `;
+      return Object.entries(data).map(([key, value]) => {
+        return `<${key}>${value}</${key}>`
+      });
     };
 
-    const postData = data => {
-      const options = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/xml; charset=utf-8' },
-        body: createObjXML(data)
-      };
+    const postData = data => sendXML('POST', createObjXML(data));
+    const deleteStudent = album => sendXML('DELETE', `<album>${album}</album>`);
 
-      fetch('/submit', options)
-        .then(res => {
-          if (!res.ok) throw new Error(res.statusText);
-          return res.json();
-        })
-        .then(displayData)
-        .catch(error => window.alert(error));
-    };
-
-    const sendXML = xml => {
+    const sendXML = (method, xml) => {
       const xhr = new XMLHttpRequest();
-      
       // Set up the response handler
       xhr.onreadystatechange = function () {
         if (this.readyState !== XMLHttpRequest.DONE) return;
-        if (this.status == 200 && this.getResponseHeader('content-type') !== 'application/xml') {
+        if (this.status == 200 && xhr.getResponseHeader('content-type').includes('application/xml')) {
           const resXML = this.responseText;
-          const json = processResponseXML(resXML);
+          const json = parseResponseXML(resXML);
           displayData(json);
         }
-        else window.alert('There was a problem with this request.');
+        else alert('Problem z odebraniem odpowiedzi z serwera');
       };
-
       // Send the request
-      xhr.open('POST', `/submit`, true);
+      xhr.open(method, `/submit`, true);
       xhr.setRequestHeader('Content-Type', 'application/xml');
       xhr.send(xml);
     };
 
-    const processResponseXML = res => {
-      // TODO
+    const parseResponseXML = xml => {
+      const parser = new DOMParser();
+      const xmlDOM = parser.parseFromString(xml, 'application/xml');
+      const studentsDOM = xmlDOM.querySelectorAll('student');
+
+      return [...studentsDOM].map(studentDOM => {
+        return Object.fromEntries([...studentDOM.children].map(property => {
+          let value = property.textContent;
+          if (!isNaN(value)) value *= 1;
+          return [property.tagName, value];
+        }));
+      });
     };
 
     const sendData = () => {
@@ -111,7 +149,7 @@
         } else {
           const [album, subject, grade] = data;
           if (+grade < 2 || +grade > 5) {
-            return alert('Grade must be between 2 and 5');
+            return alert('Ocena musi być między 2 a 5');
           }
           postData({ album, subject, grade });
         }
@@ -127,10 +165,11 @@
 
 <body>
   <div id="container"></div>
-
-  <canvas></canvas>
-  <textarea name="input" id="input" cols="30" rows="10" placeholder="Wpisz dane w formacie CSV"></textarea>
-  <input type="submit" value="Wyślij" onclick="sendData()">
+  <canvas id="canvas"></canvas>
+  <div>
+    <textarea name="input" id="input" cols="30" rows="10" placeholder="Wpisz dane w formacie CSV"></textarea>
+    <input type="submit" value="Wyślij" onclick="sendData()">
+  </div>
 </body>
 
 </html>

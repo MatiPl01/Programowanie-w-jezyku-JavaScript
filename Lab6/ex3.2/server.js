@@ -1,3 +1,4 @@
+const { XMLParser } = require('fast-xml-parser');
 const http = require('http');
 const fs = require('fs');
 const file = 'index.html';
@@ -31,7 +32,8 @@ const server = http.createServer((req, res) => {
                 req.on('data', chunk => chunks.push(chunk));
                 req.on('end', () => {
                     const body = chunks.join('');
-                    const data = JSON.parse(body);
+                    const parser = new XMLParser();
+                    const data = parser.parse(body);
 
                     if (Object.keys(data).length === 1 && data.album !== undefined) {
                         students.delete(data.album);
@@ -63,25 +65,36 @@ const server = http.createServer((req, res) => {
                     res.writeHead(200, { 'Content-Type': 'application/xml; charset=utf-8' });
                     res.end(createResponse());
                 });
+
+            } else if (req.method === 'DELETE') {
+                const chunks = [];
+                req.on('data', chunk => chunks.push(chunk));
+                req.on('end', () => {
+                    const body = chunks.join('');
+                    const parser = new XMLParser();
+                    const data = parser.parse(body);
+                    students.delete(data.album);
+                    res.writeHead(200, { 'Content-Type': 'application/xml; charset=utf-8' });
+                    res.end(createResponse());
+                });
             }
             break;
     }
 });
 
-const createResponse = () => {
-    return `
-        <?xml version="1.0" encoding="UTF-8"?>
-        <root>
-        ${createResponseJSON().map(student => `
-            <element>
-                ${Object.entries(student).map(([key, value]) => {
-                    return `<${key}>${value}</${key}>`
-                })}
-            </element>
-        `).join('')}
-        </root>
-    `;
-};
+const createResponse = () => `
+    <students>
+        ${createResponseJSON().map(createStudentXML).join('')}
+    </students>
+`;
+
+const createStudentXML = data => `
+    <student>
+        ${Object.entries(data).map(([key, value]) => {
+            return `<${key}>${value}</${key}>`
+        }).join('')}
+    </student>
+`;
 
 const createResponseJSON = () => {
     const res = [];
@@ -94,8 +107,8 @@ const createResponseJSON = () => {
                 album,
                 firstName: student.firstName,
                 lastName: student.lastName,
-                subject: gradeObj.subject,
-                grade: gradeObj.grade
+                subject: gradeObj.subject || '',
+                grade: gradeObj.grade || ''
             });
         });
 
@@ -104,15 +117,14 @@ const createResponseJSON = () => {
                 album,
                 firstName: student.firstName,
                 lastName: student.lastName,
-                subject: student.subject,
-                grade: student.grade
+                subject: student.subject || '',
+                grade: student.grade || ''
             });
         }
     });
 
     return res;
 };
-
 
 server.listen(8080);
 

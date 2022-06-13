@@ -19,7 +19,7 @@ const server = http.createServer((req, res) => {
           });
         } else {
           res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
-          res.write(`The '${file}'file does not exist`);
+          res.write(`The '${file}' file does not exist`);
           res.end();
         }
       });
