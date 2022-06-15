@@ -87,7 +87,7 @@ move = (meeting, action) => {
     case Action.HOUR_LATER:
       const newHour = meeting.date.getHours() + 1;
       if (newHour + meeting.duration > 20 || 
-          newHour + meeting.duration == 20 && (meeting.date.getMinutes() > 0 || meeting.date.getSeconds() > 0)) {
+          newHour + meeting.duration === 20 && (meeting.date.getMinutes() > 0 || meeting.date.getSeconds() > 0)) {
           throw new Error('Meeting cannot end after 20:00');
         }
       result.date.setHours(newHour);

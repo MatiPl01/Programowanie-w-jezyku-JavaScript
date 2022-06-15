@@ -16,7 +16,7 @@ function requestListener(request, response) {
 	console.log("--------------------------------------");
 	console.log("The relative URL of the current request: " + request.url + "\n");
 	var url = new URL(request.url, `http://${request.headers.host}`); // Create the URL object
-	if (url.pathname == '/submit') { // Processing the form content, if the relative URL is '/submit'
+	if (url.pathname === '/submit') { // Processing the form content, if the relative URL is '/submit'
 		/* ************************************************** */
 		console.log("Creating a response header");
 		// Creating an answer header — we inform the browser that the body of the answer will be plain text
@@ -24,7 +24,7 @@ function requestListener(request, response) {
 		/* ************************************************** */
 		console.log("Creating a response body");
 
-		if (request.method == 'GET') {
+		if (request.method === 'GET') {
 			const path = url.searchParams.get('path');
 
 			checkEntityType(path, type => {

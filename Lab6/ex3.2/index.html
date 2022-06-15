@@ -108,7 +108,7 @@
       // Set up the response handler
       xhr.onreadystatechange = function () {
         if (this.readyState !== XMLHttpRequest.DONE) return;
-        if (this.status == 200 && xhr.getResponseHeader('content-type').includes('application/xml')) {
+        if (this.status === 200 && xhr.getResponseHeader('content-type').includes('application/xml')) {
           const resXML = this.responseText;
           const json = parseResponseXML(resXML);
           displayData(json);
@@ -140,7 +140,7 @@
       if (!input.length) return alert('Nieprawidłowa liczba wartości');
 
       const data = input.split(',').map(part => part.trim());
-      if (data.length == 3) {
+      if (data.length === 3) {
         // Student data input
         if (isNaN(data[2])) {
           const [album, firstName, lastName] = data;

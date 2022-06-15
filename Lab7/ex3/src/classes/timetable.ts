@@ -245,7 +245,7 @@ export default class Timetable implements ITimetable {
   private nextNode(node: TNode): TNode | null {  // O(log(n))
     if (node.right) return this.minChild(node.right);
     while (node.parent) {
-      if (node.parent.left == node) return node.parent;
+      if (node.parent.left === node) return node.parent;
       node = node.parent;
     }
     return null;
@@ -275,7 +275,7 @@ export default class Timetable implements ITimetable {
   private isTimeValid(date: Date, duration: number): boolean {  // O(1)
     if (date.getHours() < 8) return false;
     if (date.getHours() + duration > 20 ||
-      date.getHours() + duration == 20 && (date.getMinutes() > 0 || date.getSeconds() > 0)) {
+      date.getHours() + duration === 20 && (date.getMinutes() > 0 || date.getSeconds() > 0)) {
       return false;
     }
     return true;

@@ -13,14 +13,14 @@ function requestListener(request, response) {
 	console.log("--------------------------------------");
 	console.log("The relative URL of the current request: " + request.url + "\n");
 	var url = new URL(request.url, `http://${request.headers.host}`); // Create the URL object
-	if (url.pathname == '/submit') { // Processing the form content, if the relative URL is '/submit'
+	if (url.pathname === '/submit') { // Processing the form content, if the relative URL is '/submit'
 		/* ************************************************** */
 		console.log("Creating a response header");
 		// Creating an answer header — we inform the browser that the body of the answer will be plain text
 		response.writeHead(200, { "Content-Type": "text/plain; charset=utf-8" });
 		/* ************************************************** */
 		console.log("Creating a response body");
-		if (request.method == 'GET') // If the GET method was used to send data to the server
+		if (request.method === 'GET') // If the GET method was used to send data to the server
 			// Place given data (here: 'Hello <name>') in the body of the answer
 			response.write(`Hello ${url.searchParams.get('name')}`); // "url.searchParams.get('name')" contains the contents of the field (form) named 'name'
 		else // If other method was used to send data to the server

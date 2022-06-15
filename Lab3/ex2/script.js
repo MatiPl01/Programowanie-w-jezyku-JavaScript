@@ -100,8 +100,8 @@ const stop = () => {
 }
 
 const calcAvgDiff = arr => {
-  if (arr.length == 0) return 0
-  if (arr.length == 1) return arr[0]
+  if (arr.length === 0) return 0
+  if (arr.length === 1) return arr[0]
   const n = arr.length - 1
   let sum = 0
   for (let i = 0; i < n - 1; i++) sum += (arr[i + 1] - arr[i])

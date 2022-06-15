@@ -1,24 +1,6 @@
-enum Action {
-  DAY_EARLIER = 'Dzień wcześniej',
-  DAY_LATER = 'Dzień później',
-  HOUR_EARLIER = 'Godzinę wcześniej',
-  HOUR_LATER = 'Godzinę później'
-};
-
-type Meeting = {
-  title: string;
-  date: Date;
-  duration: number;
-  participants: string[];
-};
-
-interface ITimetable {
-  canBeTransferredTo(meeting: Meeting, date: Date): boolean;  // I modified this because only date as a parameter made no sense
-  busy(date: Date): boolean;
-  put(meeting: Meeting): boolean;
-  get(date: Date): Meeting | null;
-  perform(actions: Array<Action>): void;
-};
+import Meeting from '../types/meeting.type';
+import Action from '../enums/action.enum';
+import ITimetable from '../interfaces/timetable.interface';
 
 
 class TNode {
@@ -68,7 +50,7 @@ class TNode {
     return this.endDate <= date;
   }
 
-  public takesPlaceAt(date: Date): boolean {
+  public takesPlaceAt(date: Date): boolean { 
     return this.startDate <= date && date < this.endDate;
   }
 }
@@ -110,6 +92,7 @@ export default class Timetable implements ITimetable {
   }
 
   public put(meeting: Meeting): boolean {  // O(log(n))
+    if (!this.isTimeValid(meeting.date, meeting.duration)) return false;
     const node = new TNode(meeting);
 
     if (!this.root) this.root = node;
@@ -146,7 +129,7 @@ export default class Timetable implements ITimetable {
     const meetings = this.getNextMeetings(actions.length);
     const removedMeetings: Meeting[] = [];
     const updatedMeetings: Meeting[] = [];
-
+    
     for (let i = 0; i < Math.min(actions.length, meetings.length); i++) {
       const action = actions[i];
       if (!action) continue;
@@ -158,7 +141,7 @@ export default class Timetable implements ITimetable {
       if (!this.isTimeValid(meeting.date, meeting.duration)) {
         // Restore removed meetings nodes
         removedMeetings.forEach(meeting => this.put(meeting));
-        throw new Error('Could not move the specified meetings');
+        throw new Error('Nie można przesunąć spotkań');
       }
 
       updatedMeetings.push(meeting);
@@ -171,7 +154,7 @@ export default class Timetable implements ITimetable {
         for (let i = 0; i < idx; i++) this.remove(updatedMeetings[i]);
         // Restore removed meetings nodes
         removedMeetings.forEach(meeting => this.put(meeting));
-        throw new Error('Could not move the specified meetings');
+        throw new Error('Nie można przesunąć spotkań');
       }
     });
   }
@@ -293,16 +276,9 @@ export default class Timetable implements ITimetable {
   private isTimeValid(date: Date, duration: number): boolean {  // O(1)
     if (date.getHours() < 8) return false;
     if (date.getHours() + duration > 20 ||
-      date.getHours() + duration === 20 && (date.getMinutes() > 0 || date.getSeconds() > 0)) {
+       (date.getHours() + duration === 20 && (date.getMinutes() > 0 || date.getSeconds() > 0))) {
       return false;
     }
     return true;
   }
-}
-
-
-export {
-  Timetable,
-  Action,
-  Meeting
 }

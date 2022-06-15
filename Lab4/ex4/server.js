@@ -5,10 +5,10 @@ import Files from './modules/files.js';
 
 const requestListener = (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host}`);
-  if (url.pathname == '/GET') {
+  if (url.pathname === '/GET') {
     res.writeHead(200, { "Content-Type": "text/plain; charset=utf-8" });
 
-    if (req.method == 'GET') {
+    if (req.method === 'GET') {
       const enteredPath = url.searchParams.get('path');
       Files.recursive(enteredPath);
     }

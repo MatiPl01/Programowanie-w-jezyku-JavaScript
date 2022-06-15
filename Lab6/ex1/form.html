@@ -27,7 +27,7 @@
 
       xhr.onreadystatechange = function () {
         if (this.readyState !== XMLHttpRequest.DONE) return; // If the response is ready
-        if (this.status == 200) {                           // If the request was correct
+        if (this.status === 200) {                           // If the request was correct
           if (this.getResponseHeader('content-type') !== 'application/xml') {
             // If the received data is plain text or a JSON document
             var received_data = this.responseText; // Get a response in the form of a string
@@ -77,8 +77,8 @@
     /* The function that processes the AJAX response from the server */
     /*****************************************************************/
     function response(xhr) {
-      if (xhr.readyState == XMLHttpRequest.DONE) { // If the response is ready
-        if (xhr.status == 200) {                   // If the request was correct
+      if (xhr.readyState === XMLHttpRequest.DONE) { // If the response is ready
+        if (xhr.status === 200) {                   // If the request was correct
           if (xhr.getResponseHeader('content-type') !== 'application/xml') {
             // If the received data is plain text or a JSON document
             var received_data = xhr.responseText; // Get a response in the form of a string

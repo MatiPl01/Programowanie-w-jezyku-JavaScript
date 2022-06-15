@@ -12,7 +12,7 @@ http.createServer(function (request, response) {
     // the contents of a file (an HTML document) - its name contains the 'file' variable
     case '/':
       fs.stat(file, function (err, stats) {
-        if (err == null) { // If the file exists
+        if (err === null) { // If the file exists
           fs.readFile(file, function (err, data) { // Read it content
             response.writeHead(200, { "Content-Type": "text/html; charset=utf-8" });
             response.write(data);   // Send the content to the web browser
