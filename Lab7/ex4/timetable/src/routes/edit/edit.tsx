@@ -1,10 +1,9 @@
-// import "./edit.scss";  // FIXME
-
 import { useState } from "react";
 import Timetable from "../../classes/timetable";
 import EditableMeeting from "../../components/editable-meeting/editable-meeting";
 import Action from "../../enums/action.enum";
 import parse from "../../utils/parse.util";
+import "./edit.scss";
 
 
 interface EditProps {
@@ -39,7 +38,7 @@ const Edit: React.FC<EditProps> = ({ timetable, updateTimetable }) => {
 
   return (
     <article className="edit">
-      <h2 className="edit__heading">Harmonogram spotkań</h2>
+      <h2 className="edit__heading heading-primary">Harmonogram spotkań</h2>
       <ul className="edit__meetings">
         {
           meetings.map((meeting, i) => {
@@ -58,8 +57,8 @@ const Edit: React.FC<EditProps> = ({ timetable, updateTimetable }) => {
       </ul>
 
       <menu className="edit__menu">
-        <input type="reset" value="Wyczyść" onClick={onReset} />
-        <input type="submit" value="Zatwierdź zmiany" onClick={onSubmit} />
+        <input className="edit__button edit__button--reset" type="reset" value="Wyczyść" onClick={onReset} />
+        <input className="edit__button edit__button--submit" type="submit" value="Zatwierdź zmiany" onClick={onSubmit} />
       </menu>
     </article>
   );

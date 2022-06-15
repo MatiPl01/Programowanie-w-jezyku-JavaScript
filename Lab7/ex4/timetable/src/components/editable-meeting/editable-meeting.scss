@@ -1,0 +1,32 @@
+@use '../../scss/colors.scss' as c;
+
+
+.editable-meeting {
+  background-color: c.$gray-light-1;
+  border-radius: .5rem;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+
+  &__title {
+    font-family: Poppins, Arial, Helvetica, sans-serif;
+    color: c.$primary;
+    font-size: 1.8rem;
+  }
+
+  &__content {
+    flex-grow: 1;
+  }
+
+  &__select {
+    padding: 1rem;
+    border-radius: 5rem;
+    border: 1px solid c.$primary;
+  }
+
+  &__heading {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: c.$gray-dark-2;
+  }
+}

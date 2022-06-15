@@ -1,0 +1,46 @@
+@use '../../scss/colors.scss' as c;
+@use '../../scss/gradients.scss' as g;
+@use '../../scss/shadows.scss' as s;
+
+
+.meeting {
+  background-color: c.$gray-light-1;
+  border-radius: .5rem;
+  padding: 1rem;
+
+  &__title {
+    font-size: 1.8rem;
+    color: c.$primary;
+    text-shadow: s.$black-large-light;
+    margin-bottom: 1rem;
+  }
+
+  &__details {
+    list-style: none;
+    font-size: 1.4rem;
+  }
+
+  &__date,
+  &__duration {
+    display: flex;
+    gap: 1rem;
+
+    span:last-child {
+      font-weight: bold;
+    }
+  }
+
+  &__participants {
+    margin-top: 1rem;
+    padding-bottom: .5rem;
+  }
+
+  &__participants-list {
+    list-style: square;
+    margin-left: 2rem;
+  }
+  
+  &__participant {
+    line-height: 2rem;
+  }
+}

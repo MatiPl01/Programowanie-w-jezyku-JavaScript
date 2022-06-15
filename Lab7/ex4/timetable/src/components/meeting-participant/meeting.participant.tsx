@@ -1,3 +1,6 @@
+import "./meeting-participant.scss";
+
+
 interface MeetingParticipantProps {
   email: string;
   removeParticipant(email: string): void;

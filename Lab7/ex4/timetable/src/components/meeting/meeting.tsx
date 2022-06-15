@@ -1,6 +1,5 @@
-// import "meeting.scss";
-
 import IMeeting from "../../types/meeting.type";
+import "./meeting.scss";
 
 
 interface MeetingProps {

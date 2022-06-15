@@ -1,0 +1,4 @@
+@use './colors.scss' as c;
+
+
+$primary: linear-gradient(to bottom right, c.$primary-light, c.$primary);

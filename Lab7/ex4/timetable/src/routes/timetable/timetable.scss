@@ -1,0 +1,13 @@
+.timetable {
+  padding: 2rem;
+
+  &__meetings {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    list-style: none;
+    overflow-y: auto;
+    height: 36rem;
+  }
+}

@@ -1,8 +1,7 @@
-// import "./add.scss";  // FIXME
-
 import React, { FormEvent, useState } from "react";
 import MeetingParticipant from "../../components/meeting-participant/meeting.participant";
 import Meeting from "../../types/meeting.type";
+import "./add.scss";
 
 
 interface AddProps {
@@ -19,9 +18,16 @@ const Add: React.FC<AddProps> = props => {
 
   const onAddParticipantClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    if (!email.length) {
+      alert('Podaj email uczestnika spotkania');
+      return;
+    }
+
     if (participants.indexOf(email) === -1) {
       email && setParticipants([...participants, email]);
       setEmail('');
+    } else {
+      alert(`Nie można dodać uczestnika. Uczestnik o adresie email ${email} już istnieje`)
     }
   };
 
@@ -44,7 +50,7 @@ const Add: React.FC<AddProps> = props => {
         (e.target as HTMLFormElement).reset();
         onReset();
       }
-    }
+    } else alert('Dodaj wszystkie dane');
   };
 
   const onReset = () => {
@@ -53,21 +59,23 @@ const Add: React.FC<AddProps> = props => {
 
   return (
     <article className="add-meeting">
-      <h2 className="add-meeting__heading">Zaplanuj spotkanie</h2>
+      <h2 className="add-meeting__heading heading-primary">Zaplanuj spotkanie</h2>
 
       <form className="add-meeting__form" onSubmit={onSubmit}>
-        <input type="text" name="title" id="title" className="add-meeting__input add-meeting__input--title" placeholder="Nazwa spotkania" onInput={e => setTitle((e.target as HTMLInputElement).value)} />
-        <input type="datetime-local" name="date" id="date" className="add-meeting__input add-meeting__input--date" onInput={e => onDateInput((e.target as HTMLInputElement).value)}/>
-        <input type="number" name="duration" id="duration" placeholder="Czas trwania" min="1" max="12" onInput={e => setDuration(+(e.target as HTMLInputElement).value)} />
+        <div className="add-meeting__form-group">
+          <input type="text" name="title" id="title" className="add-meeting__input add-meeting__input--title" placeholder="Nazwa spotkania" onInput={e => setTitle((e.target as HTMLInputElement).value)} />
+          <input type="datetime-local" name="date" id="date" className="add-meeting__input add-meeting__input--date" onInput={e => onDateInput((e.target as HTMLInputElement).value)}/>
+          <input type="number" name="duration" id="duration" placeholder="Czas trwania" min="1" max="12" className="add-meeting__input add-meeting__input--duration" onInput={e => setDuration(+(e.target as HTMLInputElement).value)} />
 
-        <label>
-          <input type="email" name="email" id="email" placeholder="Email uczestnika" value={email} onInput={e => setEmail((e.target as HTMLInputElement).value)} />
-          <button className="add-meeting__button" onClick={onAddParticipantClick}>
-            <svg className="add-meeting__icon">
-              <use href="/assets/icons.svg#plus" />
-            </svg>
-          </button>
-        </label>
+          <label className="add-meeting__form-label">
+            <input type="email" name="email" id="email" placeholder="Email uczestnika" value={email} className="add-meeting__input add-meeting__input--email" onInput={e => setEmail((e.target as HTMLInputElement).value)} />
+            <button className="add-meeting__button add-meeting__button--add-user" onClick={onAddParticipantClick}>
+              <svg className="add-meeting__icon">
+                <use href="/assets/icons.svg#plus" />
+              </svg>
+            </button>
+          </label>
+        </div>
       
         <ul className="add-meeting__participants">
           {
@@ -78,8 +86,8 @@ const Add: React.FC<AddProps> = props => {
         </ul>
 
         <menu className="add-meeting__menu">
-          <input type="submit" value="Zapisz" />
-          <input type="reset" value="Wyczyść" onClick={onReset} />
+          <input className="add-meeting__button add-meeting__button--submit" type="submit" value="Zapisz" />
+          <input className="add-meeting__button add-meeting__button--reset" type="reset" value="Wyczyść" onClick={onReset} />
         </menu>
       </form>
     </article>

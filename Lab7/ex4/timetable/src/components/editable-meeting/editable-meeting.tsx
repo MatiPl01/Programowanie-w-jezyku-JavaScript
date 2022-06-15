@@ -1,7 +1,6 @@
-// import "editable-meeting.scss";
-
 import Action from "../../enums/action.enum";
 import Meeting from "../../types/meeting.type";
+import "./editable-meeting.scss";
 
 
 interface EditableMeetingProps {
@@ -38,6 +37,7 @@ const EditableMeeting: React.FC<EditableMeetingProps> = (
       <section className="editable-meeting__edit">
         <h4 className="editable-meeting__heading">Przesuń spotkanie</h4>
         <select 
+          className="editable-meeting__select"
           name="action" 
           id="action" 
           value={currentAction || ''}

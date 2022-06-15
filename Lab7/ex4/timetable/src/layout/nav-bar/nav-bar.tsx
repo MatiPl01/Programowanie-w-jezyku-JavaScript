@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import "./nav-bar.scss";
 
 
 const NavBar = () => {
@@ -6,13 +7,13 @@ const NavBar = () => {
     <nav className="nav-bar">
       <ul className="nav-bar__items">
         <li className="nav-bar__item">
-          <Link className="nav-bar__link" to="/">Harmonogram</Link>
+          <NavLink className="nav-bar__link" to="/">Harmonogram</NavLink>
         </li>
         <li className="nav-bar__item">
-          <Link className="nav-bar__link" to="/add">Dodawanie spotkania</Link>
+          <NavLink className="nav-bar__link" to="/add">Dodawanie spotkania</NavLink>
         </li>
         <li className="nav-bar__item">
-          <Link className="nav-bar__link" to="/edit">Edycja</Link>
+          <NavLink className="nav-bar__link" to="/edit">Edycja</NavLink>
         </li>
       </ul>
     </nav>

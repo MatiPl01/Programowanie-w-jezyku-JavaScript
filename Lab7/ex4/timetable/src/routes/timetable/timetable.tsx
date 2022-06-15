@@ -1,7 +1,6 @@
-// import "./timetable.scss"; // FIXME
-
 import TimetableClass from "../../classes/timetable";
 import Meeting from "../../components/meeting/meeting";
+import "./timetable.scss";
 
 
 interface TimetableProps {
@@ -14,7 +13,11 @@ const Timetable: React.FC<TimetableProps> = props => {
 
   return (
     <article className="timetable">
-      <h2 className="timetable__heading">Harmonogram spotkań</h2>
+      <h2 className="timetable__heading heading-primary">
+        {
+          meetings.length ? 'Harmonogram spotkań' : 'Brak zaplanowanych spotkań'
+        }
+      </h2>
       <ul className="timetable__meetings">
         {
           meetings.map((meeting, idx) => {

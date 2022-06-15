@@ -1,0 +1,28 @@
+@use '../../scss/colors.scss' as c;
+
+
+.nav-bar {
+  padding: 1.5rem;
+  border-bottom: 1px solid c.$primary;
+
+  &__items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    list-style: none;
+  }
+  
+  &__link {
+    text-decoration: none;
+    font-family: Poppins, Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    font-size: 1.8rem;
+    border-bottom: .5rem solid transparent;
+    color: c.$gray-dark-3;
+
+    &[aria-current] {
+      border-color: c.$primary;
+      color: c.$black;
+    }
+  }
+}

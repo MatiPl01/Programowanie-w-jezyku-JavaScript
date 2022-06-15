@@ -1,0 +1,32 @@
+@use '../../scss/colors.scss' as c;
+@use '../../scss/shadows.scss' as s;
+@use '../../scss/gradients.scss' as g;
+
+
+.meeting-participant {
+  width: 100%;
+  padding: .5rem 1rem;
+  border-radius: 5rem;
+  background-color: c.$gray-light-1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__email {
+    font-size: 1.4rem;
+    color: c.$gray-dark-1;
+  }
+
+  &__remove-btn {
+    background: g.$primary;
+    padding: .75rem;
+    border-radius: 5rem;
+    box-shadow: s.$black-large-light;
+  }
+
+  &__remove-icon {
+    font-size: 1.2rem;
+    fill: c.$white;
+    filter: drop-shadow(s.$black-small-medium);
+  }
+}
